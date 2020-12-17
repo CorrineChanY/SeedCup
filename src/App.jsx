@@ -1,12 +1,13 @@
 // import { render } from "@testing-library/react";
 // import React, { useState } from "react";
 import Rt from "../src/router/router"
-
+import Banner from "./img/BANNER.png"
 
 function App() {
   
     return(
       <div>
+        <img src={Banner} alt="logo" className="logo" />
         <Rt />
       </div>
     )
