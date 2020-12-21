@@ -1,0 +1,21 @@
+.main-banner {
+    text-align: center;
+  }
+
+.main-banner .containtent {
+    height: 55vh;
+    background: #000 url("../../img/BANNER.png") center no-repeat;
+    box-shadow: none;
+    background-size: contain;
+  }
+
+.nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.seedlogo {
+    position: absolute;
+    margin: 0 20px;
+  }

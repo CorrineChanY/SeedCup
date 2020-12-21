@@ -29,18 +29,12 @@ class Rt extends React.Component{
                     <Route path="/index" component={Seed}/>
                     <Route path="/signin" component={SignIn}/>
                     <Route path="/signup" component={SignUp}/>
-                    {/* export default withRouter(Rt); */}
-                    <Link
-                        to={{
-                            pathname: '/index',
-                            state: {  // 页面跳转要传递的数据，如下
-                                
-                            },
-                        }}
-                    >
-                    <button>
-                            点击跳转
-                    </button>
+                    {/* <Route path="/download_doc" component={Download_btn}/> */}
+
+                    <Link to="/index">
+                        <button className="btn-large join-button">
+                            index
+                        </button>
                     </Link>
                 </Router>
             </>

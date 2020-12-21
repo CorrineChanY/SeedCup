@@ -7,13 +7,12 @@
  */
 
 import React from 'react'
+import "../signin/signin.css"
 
 class SignIn extends React.Component{
     render() {
         return(
-            <div>
-                <h1>This is SignIn Page!</h1>
-            </div>
+            <h1>This is SignIn Page!</h1>
         )
     }
 };
