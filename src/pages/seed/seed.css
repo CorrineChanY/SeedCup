@@ -9,13 +9,441 @@
     background-size: contain;
   }
 
-.nav {
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.seedlogo {
-    position: absolute;
+  .container {
+    width: 1000px;
+  }
+  
+  .join-button {
+    position: relative;
+    top: 40vh;
+  }
+  
+  .contenter {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  #tester {
+    position: relative;
+    right: 10px;
+    font-size: 10px;
+    top: 30px;
+    background-color: grey;
+  }
+  
+  #upload {
+    position: relative;
+    left: 10px;
+    font-size: 10px;
+    top: 30px;
+    background-color: grey;
+  }
+  
+  #upload-file-info {
+    position: relative;
+  }
+  
+  #submitter {
+    background-color: #fff;
+    border-color: #1c4bb4;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 10px;
+    color: #1c4bb4;
+    height: 60px;
+    font-size: 17px;
+  }
+  
+  #download_btn {
+    background-color: #fff;
+    border-color: #1c4bb4;
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 10px;
+    color: #1c4bb4;
+    height: 60px;
+    font-size: 17px;
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .seedlogo {
+    position: relative;
     margin: 0 20px;
+  }
+  
+  .submitter {
+    width: 400px;
+    height: 150px;
+    margin-top: 100px;
+    border-style: none;
+  }
+  
+  .page-container {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-size: 0;
+    color: rgb(84, 84, 84);
+  }
+  
+  /*所有分页的样式*/
+  .page1-container,
+  .page3-container,
+  .page2-container,
+  .page4-bottom {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .page1-container,
+  .page3-container {
+    background: rgb(237, 238, 239);
+  }
+  
+  .page2-container,
+  .page4-bottom {
+    background: rgb(255, 255, 255);
+  }
+  
+  @media (min-width: 1000px) {
+    /* 当屏幕大于1000时，执行下面css */
+    .page1-container,
+    .page3-container {
+      height: 530px;
+    }
+  
+    .page2-container,
+    .page4-bottom {
+      height: 580px;
+    }
+  
+    .page4-bottom {
+      height: 730px;
+      overflow-y: hidden;
+    }
+  
+    /*第一页*/
+    .page1-inner,
+    .page2-inner {
+      width: 70%;
+      height: 480px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .page2-inner {
+      flex-direction: row-reverse;
+    }
+  
+    .page1-img,
+    .page2-img,
+    .page3-img {
+      width: 240px;
+      height: auto;
+      margin: 0 5%;
+    }
+  
+    .page3-img {
+      margin: 0 auto;
+      padding: 50px 0;
+    }
+  
+    .page1-img img,
+    .page2-img img,
+    .page3-img img {
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
+  
+    .page1-content,
+    .page2-content {
+      width: 55%;
+      height: auto;
+      line-height: 22px;
+      font-weight: bolder;
+      font-size: 12px;
+      margin: 0 5%;
+    }
+    .page1-content p {
+      text-indent: 2em;
+      text-align: justify;
+      margin: 0;
+    }
+  
+    /*第二页*/
+    .page2-inner {
+      margin: 80px auto 0;
+    }
+  
+    .page2-part1,
+    .page2-part2 {
+      width: 100%;
+      height: auto;
+      margin: 0;
+      margin-bottom: 30px;
+    }
+  
+    .page2-part1 > span,
+    .page2-part2 > span {
+      font-size: 26px;
+      font-weight: bolder;
+      margin: 0;
+      color: rgb(65, 65, 65);
+      padding: 0 0 15px;
+    }
+  
+    .page2-part1 p,
+    .page2-part2 p {
+      font-size: 12px;
+      text-align: justify;
+    }
+  
+    .page2-part2 p {
+      margin: 0;
+    }
+  
+    .competention1,
+    .competention2 {
+      width: 100%;
+      height: auto;
+      margin: 10px 0 25px;
+    }
+  
+    .competention1 > span,
+    .competention2 > span {
+      font-size: 16px;
+      font-weight: bolder;
+      color: rgb(45, 45, 45);
+      margin: 0 0 10px;
+    }
+  
+    /*第四页*/
+    .page4-inner {
+      height: 730px;
+      width: 70%;
+      margin: 0 auto;
+      padding: 170px 0;
+    }
+  
+    /*sticks*/
+    .page4-stick,
+    .page3-stick,
+    .page2-stick,
+    .page1-stick {
+      position: relative;
+      z-index: 1;
+      width: 500px;
+      height: auto;
+      padding: 0;
+    }
+  
+    .page1-stick {
+      top: -18%;
+      left: -14%;
+    }
+  
+    .page2-stick {
+      top: -68%;
+      left: 75%;
+    }
+  
+    .page3-stick {
+      top: -25%;
+      left: 35%;
+    }
+  
+    .page4-stick {
+      top: -30%;
+      left: 35%;
+    }
+  
+    .page4-stick img,
+    .page3-stick img,
+    .page2-stick img,
+    .page1-stick img {
+      width: 100%;
+      height: auto;
+      margin: 0;
+    }
+    .page3-page4 {
+      height: 350px;
+      top: -60%; 
+      width: 65%;
+    }
+  
+    .page3-page4 li {
+      width: 240px;
+      padding: 15px 25px;
+    }
+    .rank-prize {
+      font-size: 24px;
+      color: #5f7ffc;
+      margin: 24px 0 18px;
+    }
+    .rank-info p {
+      font-size: 16px;
+      line-height: 30px;
+      letter-spacing: 1px;
+    }
+  
+    .rank-bar {
+      font-size: 34px;
+    }
+    .rank-number {
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .page3-container {
+      height: 60vh;
+    }
+    .page1-img,
+    .page2-img,
+    .page3-img {
+      text-align: center;
+      padding: 5vw 20vw;
+    }
+    .page1-content,
+    .page2-content {
+      font-size: 14px;
+      padding: 0 5vw 5vw 5vw;
+    }
+    .page4-stick,
+    .page3-stick,
+    .page2-stick,
+    .page1-stick {
+      display: none;
+    }
+  
+    .page3-page4 {
+      height: 40vh;
+      padding: 0 10vw;
+    }
+  
+    .page3-page4 li {
+      width: 31vw;
+      padding: 1.5vh 4vw;
+    }
+    .page4-bottom {
+      font-size: 14px;
+    }
+    .page4-inner {
+      padding: 20vh 5vw 0;
+    }
+    .rank-bar {
+      font-size: 4vh;
+    }
+    .rank-number {
+      font-size: 2vh;
+      margin-left: 2vh;
+    }
+    .rank-prize {
+      font-size: 2vh;
+      color: #5f7ffc;
+      margin: 1vw 0;
+    }
+    .rank-info p {
+      font-size: 1.4vh;
+      line-height: 3vh;
+      letter-spacing: 0.4vh;
+    }
+  }
+  
+  .page3-page4 li {
+    height: 100%;
+    background: #ffffff;
+    border: 2px solid #5f7ffc;
+    border-radius: 15px;
+    font-weight: bolder;
+  }
+  
+  .page3-page4 {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .rank-title {
+    width: 70px;
+    height: auto;
+    color: #5f7ffc;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  
+  .prize-sorts {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+  }
+  
+  .prize-first,
+  .prize-second,
+  .prize-third {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+    font-size: 24px;
+    font-weight: bolder;
+  }
+  
+  .prize-first p,
+  .prize-second p,
+  .prize-third p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .prize-first span,
+  .prize-second span,
+  .prize-third span {
+    color: rgb(65, 65, 65);
+  }
+  
+  .prize-info {
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+  }
+  
+  .prize-info p {
+    line-height: 20px;
+    font-size: 10px;
+    font-weight: bolder;
+    color: rgb(227, 75, 57);
+  }
+  
+  .rest_pw:focus:not([readonly]) {
+    border-bottom: 1px solid #5f7ffc !important;
+    box-shadow: 0 1px 0 0 #5f7ffc !important;
+  }
+  
+  .rest_pw:focus:not([readonly]) + label {
+    color: #5f7ffc !important;
+  }
+  
+  #lister table th,
+  #lister table td {
+    text-align: center;
+  }
+  
+  #playback {
+    line-height: 0;
+    display: flex;
   }

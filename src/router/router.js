@@ -8,12 +8,13 @@
 
 import React from 'react'
 // import { render , Button} from 'react-dom'
-import { Router, Route ,withRouter} from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import createHashHistory from 'history/createHashHistory';
 import Seed from '../pages/seed/seed'
 import SignIn from '../pages/signin/signin'
 import SignUp from '../pages/signup/signup'
+import App from "../App"
 
 const hashHistory = createHashHistory();
 
@@ -28,7 +29,8 @@ class Rt extends React.Component{
                 <Router history={hashHistory}>
                     <Route path="/index" component={Seed}/>
                     <Route path="/signin" component={SignIn}/>
-                    <Route path="/signup" component={SignUp}/>
+                    <Route path="/index" component={Seed}/>
+                    <Route path="/" component={App}/>
                     {/* <Route path="/download_doc" component={Download_btn}/> */}
 
                     <Link to="/index">

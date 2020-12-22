@@ -1,12 +1,19 @@
 // import { render } from "@testing-library/react";
 // import React, { useState } from "react";
 import Rt from "../src/router/router"
+import { Link } from 'react-router-dom'
+
 
 function App() {
   
     return(
       <div>
         <Rt />
+        {/* <Link to="/index">
+            <button className="btn-large join-button">
+                index
+            </button>
+        </Link> */}
       </div>
     )
 }
