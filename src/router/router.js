@@ -29,8 +29,8 @@ class Rt extends React.Component{
                 <Router history={hashHistory}>
                     <Route path="/index" component={Seed}/>
                     <Route path="/signin" component={SignIn}/>
-                    <Route path="/index" component={Seed}/>
-                    <Route path="/" component={App}/>
+                    <Route path="/signup" component={SignUp}/>
+                    {/* <Route path="/" component={App}/> */}
                     {/* <Route path="/download_doc" component={Download_btn}/> */}
 
                     <Link to="/index">
