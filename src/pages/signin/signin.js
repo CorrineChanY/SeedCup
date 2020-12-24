@@ -28,30 +28,46 @@ class SignIn extends React.Component{
                         <form>
                             <label>用户名</label>
                             <br />
-                            <input type="input" placeholder="请用手机号登录"></input>
+                            <input type="text" placeholder="请用手机号登录" style={{width:"40%"}}></input>
                             <br />
                             <br />
                             <br />
                             <label>密码</label>
                             <br />
-                            <input type="password"></input>
+                           <input type="password" style={{width:"40%"}}></input>
                             <br />
-                            <span style={{position:"relative", left: "68%"}}><a href="/#/signup" style={{color:"white", textDecoration:"none"}}>sign up</a></span>
+                            <span style={{position:"relative", left: "48%"}}><a href="/#/signup" style={{color:"white", textDecoration:"none"}}>sign up</a></span>
                         </form>
 
                         <br />
                         <br />
                     
-                        <button type="button" className="submitinfo">
+                        <button type="button" className="submitinfo"
+                        style={{
+                            position:"absolute",
+                            left:"10px"
+                        }}>
                             登录
                         </button>
                     </div>
                     
                     
                 </div>
-
-                <div className="pdright">
-                    <img className="picinfo" src={signin} alt="picinfo" />
+                <style type="text/css"></style>
+                <div className="pdright"
+                style={{
+                    position:"absolute",
+                    top:"-100px"
+                }}>
+                    <img 
+                    className="picinfo" 
+                    src={signin} 
+                    alt="picinfo" 
+                    style={{
+                        position:"relative",
+                    left:"50px",
+                    top:"100px"}}
+                    />
                 </div>
         </div>
         )

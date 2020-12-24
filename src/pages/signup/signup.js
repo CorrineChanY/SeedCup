@@ -8,6 +8,8 @@
 
 import React from 'react'
 import "../signup/signup.css"
+import { Link } from 'react-router-dom'
+
 
 class SignUp extends React.Component{
     render() {
@@ -20,57 +22,34 @@ class SignUp extends React.Component{
                     <small style={{fontSize: "20px"}}>软件编程PK赛报名表</small>
 
                 </div>
-                <br />
+                <br /><br/><br/>
+                <br/><br/><br/>
 
-                <form className="myform">
-                    <div className="groupinfo" style={{height:"65px"}}>团队信息</div>
-                    <br />
-                    <br />
-                    <label>团队名称</label>
-
-                    <br />
-                    <input type="input" placeholder=""></input>
-
-                    <br />
-                    <br />
-                    <label>学校</label>
-                    
-                    <br />
-
-                    <input type="input" placeholder=""></input>
-                    <br />
-                    <br />
-                    <label>队伍最高年级</label>
-                    <br />
-
-                    <input type="input" placeholder=""></input>
-                    <br /><br /><br />
-
-
+                <form>
                     <div className="captain">
-                        <div className= "groupinfo" style={{height:"65px"}}>队长信息</div>
+                        <div className= "groupinfo" style={{height:"65px"}}>参赛者信息</div>
                         <br />
                         <br />
                         <label>姓名</label>
                         <br />
-                        <input type="input" placeholder=""></input>
+                        <input type="text" placeholder=""></input>
                         <br />
                         <br />
                         <label>所在院系</label>
                         <br />
-                        <input type="input" placeholder=""></input>
+                        <input type="text" placeholder=""></input>
                         <br />
                         <br />
                         <label>专业班级</label>
                         <br />
-                        <input type="input" placeholder=""></input>
+                        <input type="text" placeholder=""></input>
                         <br />
                         <br />
                         <div style={{display:"flex"}}>
                             <div style={{flex:"1"}}>
                                 <label>移动电话</label>
                                 <br />
-                                <input type="input" placeholder="" className="phone"></input>
+                                <input type="text" placeholder="" className="phone"></input>
                                 <span className="phoneinfo">phone number is wrong</span>
                             </div>
                             <button className="inputafterinfo" id="vcodeget" type="button">获取验证码</button>
@@ -78,12 +57,12 @@ class SignUp extends React.Component{
                         <br />
                         <label>验证码</label>
                         <br />
-                        <input type="input" placeholder=""></input>
+                        <input type="text" placeholder=""></input>
                         <br />
                         <br />
                         <label >Email</label>
                         <br />
-                        <input type="input" placeholder="" className="email"></input>
+                        <input type="text" placeholder="" className="email"></input>
                         <span className="emailinfo">email is wrong</span>
                         <br />
                         <br />
@@ -98,45 +77,28 @@ class SignUp extends React.Component{
                         <small color="red" style={{display:"none"}} id="gg"q>*两次密码输入要一样哦 (´・ω・`)  </small>
                     </div>
 
-                    <br /><br /><br />
-                    
-                        <div className= "groupinfo" style={{height:"65px"}}>队员信息</div>
-                        <small style={{position:"relative", top: "-50px", left:"180px", color: "rgb(145,145,148);"}}> 
-                            *每个队伍最多三人，必须选出一个队长负责领导及任务划分（队员信息
-                            <br />
-                            中不包含队长）。
-                        </small>
-
-                        <br /><br /><br />
-
-
-
-
                     <div className="allmem">
                         
                     
-                    </div>
-
-
-                    <button class="addinfo" id="addmem" type="button"> 
-                        添加队员
-
-                    </button>                
+                    </div>             
                     <br /><br /><br />
-                    <div className="groupinfo" style={{height:"65px"}}>
-                        团队介绍
-                    </div>
-                    <small style={{position:"relative", top: "-50px", left:"180px", color: "rgb(145,145,148)"}}> 
-                            *包括队员以往的竞赛经验以及获得的奖励，还可包括每个队员的特点介
-                            <br />
-                            绍，2020级新生占队里人数比例影响加分。
-                    </small>
-                    <textarea onmousedown="s(event,this)">
-                        
-                    </textarea>
+                    
                     <br /><br /><br />
+                    {/* <span> */}
+                    {/* <a href="/#/index" type="button" style={{color:"white", textDecoration:"none"}}>确认提交</a></span> */}
+                    <Link to="/index">
+                        <button 
+                        style={{color:"white",textDecoration:"none",position:"inherit",top:"-60%",height:"60px"}} 
+                        className="btn-large join-button"
+                        >
+                            
+                            确认提交
+                        </button>
+                    </Link>
 
-                    <button className="submitinfo" type="button">确认提交</button>
+                    {/* <button  */}
+                    {/* className="submitinfo"  */}
+                    {/* type="button">确认提交</button> */}
                 </form>
                         
 
