@@ -63,6 +63,7 @@ class Nav extends React.Component{
 }
 
 class Banner extends React.Component{
+    
     render() {
         return(
             <div className="containtent">
@@ -121,7 +122,7 @@ class Head1 extends React.Component{
                             </div>
                             <div className="page2-part2">
                                 <span>赛制介绍</span>
-                                <div className="competention1" whiteSpace= "pre-wrap">
+                                <div className="competention1" whitespace= "pre-wrap">
                                     <span>初赛、复赛</span>
                                     <p>
                                         1、 初赛时间为17天，要求参赛队员在规定时间内完成开放式的程序设计。<br />
@@ -137,7 +138,7 @@ class Head1 extends React.Component{
                             </div>
                         </div>
                     </div>
-                    <div class="page2-stick">
+                    <div className="page2-stick">
                         <img style={{maxWidth:"100%", overflow:"hidden"}} src={stick} alt="stick" />
                     </div>
                 </div>
