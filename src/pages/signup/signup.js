@@ -57,6 +57,58 @@ function post(userinfo){
 }
 //signup
 async function signUp(userinfo){
+    let info = {};
+            info.group_name =this.teamname;
+            info.college = this.School;
+            info.level = this.classMax;
+            info.captain_name = this.name;
+            info.captain_college = this.department;
+            info.captain_class = this.class1;
+            info.captain_phone = this.telnumber;
+            info.captain_email = this.email;
+            info.password = this.password;
+            info.team_member = this.allmem;
+            info.description = this.groupinfo;
+            //数据校验
+
+            for(let key in info){
+                if(userinfo.type(info[key])!="array")
+                if(info[key]==""||info[key]==0){
+                        this.x_alert("数据校验发现有空值");
+                        return;
+                }
+            }
+            if(!(this.password&&this.password1)){
+                this.x_alert("两次输入密码不一致");
+                return;
+            }
+            if(!judgemail(this.email)||!judgephone(this.telnumber)){
+                this.x_alert("队长邮箱/电话有误");
+                return;
+            }
+            for(let i in this.allmem){
+                if(!judgemail(this.allmem[i].email)||!judgephone(this.allmem[i].phone)){
+                    this.x_alert("成员邮箱/密码有误");
+                    return;
+                }
+            }
+            let rtmessage=await this.post("/check_sms_code/",{telephone: this.telnumber,code:  this.verCode,});
+            if (rtmessage==undefined||rtmessage.message != "success") {
+                this.x_alert("手机认证未通过！请重试");
+                this.verCode="";
+                return;
+            }
+            rtmessage = await this.post('/create_team/', info);
+            if (rtmessage.message == "success") {
+                x_alert("恭喜注册成功");
+                window.location.href = "signin.html";
+            } else if (rtmessage.message == "user already exists") {
+                x_alert("注册信息无效，请检查");
+            }
+            else
+            {
+                 x_alert("注册信息无效，请检查");
+            }
     function deleteMem(id){
         userinfo.allmen.splice(id,1);
     }
@@ -91,7 +143,7 @@ async function signUp(userinfo){
     }
 }
 //校验
-function judgeemail(email){
+function judgemail(email){
     let regu=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
     let reg = new RegExp(regu);
     let str = email;
