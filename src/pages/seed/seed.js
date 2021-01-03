@@ -74,7 +74,7 @@ class Banner extends React.Component{
                 </Link>
 
                 <Link to="">
-                    <button className="btn-large join-button"style={{position:"relative", top: "70%"}}>
+                    <button className="btn-large join-button"style={{position:"relative", top: "70%",left:"20px"}}>
                         提交结果
                     </button>
                 </Link>
@@ -116,30 +116,33 @@ class Head1 extends React.Component{
                         </div>
                         <div className="page2-content">
                             <div className="page2-part1">
+                                <br></br><br></br>
                                 <span >活动对象</span>
-                                <p>
-                                    本次活动面向对象为华中科技大学在校本科生以及武汉地区各大高校的在校本科生。为了鼓励低年级同学参加本次大赛，对20级同学组成的参赛队伍的参赛成绩予以适当加分。对于混合年级组成的队伍，以队伍中最高年级为队伍年级。</p>
+                               
+                                <br></br>
+                                <a>
+                                    本次活动面向对象为华中科技大学在校本科生以及武汉地区各大高校的在校本科生。为了鼓励低年级同学参加本次大赛，对20级同学组成的参赛队伍的参赛成绩予以适当加分。对于混合年级组成的队伍，以队伍中最高年级为队伍年级。</a>
                             </div>
                             <div className="page2-part2">
                                 <span>赛制介绍</span>
-                                <div className="competention1" whitespace= "pre-wrap">
+                                <div className="competention1">
                                     <span>初赛、复赛</span>
-                                    <p>
+                                    <br></br>
+                                    <a>
                                         1、 初赛时间为17天，要求参赛队员在规定时间内完成开放式的程序设计。<br />
                                         2、 初赛赛题和复赛赛题均在线上公布。同时官方网站也会公布试题以及评分标准，供同学们自由组队参赛并下载赛题。<br />
                                         3、 初赛和复赛题目是运用所学的算法和数据结构的知识解决应用问题,工作量约为一周。初赛和复赛作品均通过网络提交。<br />
                                         4、 所有成功完成初赛作品并提交的队伍将获得参与奖。<br />
-                                    </p>
+                                    </a>
                                 </div>
                                 <div className="competention2">
                                     <span>决赛</span>
-                                    <p>复赛得分最高的十支队伍将进入决赛。 决赛比赛当天晚上19:00优胜队伍进行决赛答辩。</p>
+                                    <br></br>
+                                    <div className="intros"></div>
+                                    <a>复赛得分最高的十支队伍将进入决赛。 决赛比赛当天晚上19:00优胜队伍进行决赛答辩。</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="page2-stick">
-                        <img style={{maxWidth:"100%", overflow:"hidden"}} src={stick} alt="stick" />
                     </div>
                 </div>
                 <div className="page3-container">
@@ -199,15 +202,18 @@ class Head1 extends React.Component{
                         <div className="prize-sorts">
                             <div className="prize-first">
                                 <span>人气奖&nbsp;&nbsp;&nbsp;&nbsp;1</span>
-                                <p>“微派•种子杯”团体人气奖荣誉证书+1000元现金</p>
+                                <div className="intro1"></div>
+                                <a>“微派•种子杯”团体人气奖荣誉证书+1000元现金</a>
                             </div>
                             <div className="prize-second">
                                 <span>优胜奖&nbsp;&nbsp;&nbsp;&nbsp;--</span>
-                                <p>通过初赛评审的所有选手赠送纪念衫+300元现金/队(奖金不叠加)</p>
+                                <div className="intro2"></div>
+                                <a>通过初赛评审的所有选手赠送纪念衫+300元现金/队(奖金不叠加)</a>
                             </div>
                             <div className="prize-third">
                                 <span>参与奖&nbsp;&nbsp;&nbsp;&nbsp;∞</span>
-                                <p>成功提交作品的队伍将赠送种子杯纪念品一套</p>
+                                <div className="intro3"></div>
+                                <a>成功提交作品的队伍将赠送种子杯纪念品一套</a>
                             </div>
                         </div>
                         <div className="prize-info">
