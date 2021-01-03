@@ -55,6 +55,62 @@ function post(userinfo){
         console.log('/posts post',response.data)
     })
 }
+//signup
+async function signUp(userinfo){
+    function deleteMem(id){
+        userinfo.allmen.splice(id,1);
+    }
+    function vcodeget(){
+        if(!judgephone(userinfo.telnumber)){
+            this.x_alert("电话格式不正确");
+            return;
+        }
+        let rtmessage=userinfo.get('/telephone/'+userinfo.telnumber);
+        console.log(rtmessage.message);
+        if(rtmessage.message="success"){
+            this.x_alert("验证码获取成功，请及时查看手机短信！");
+        }else{
+            this.x_alert("验证码获取失败");
+        }
+    }
+    function addmen(){
+        if(this.allmen.length<2)
+        this.allmen.push({
+            name:"",
+            college:"",
+            claa:"",
+            phong:"",
+            email:""
+        });
+    }
+    function x_alert(txt,title="提示"){
+        console.log("弹框");
+        this.alert.title=title;
+        this.alert.txt=txt;
+        //setTimeout(()=>此处需要模态框
+    }
+}
+//校验
+function judgeemail(email){
+    let regu=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+    let reg = new RegExp(regu);
+    let str = email;
+    if(!reg.test(str)) {
+        return false;
+    }
+    return true;
+}
+function judgephone(phone) {
+    let regu=/^1[0-9][0-9]\d{4,8}$/;
+    let reg = new RegExp(regu);
+
+    let str = phone;
+
+    if(!reg.test(str)) {
+        return false;
+    }
+    return true;
+}
 class SignUp extends React.Component{
 render() {
     return(
@@ -93,7 +149,7 @@ render() {
                                 <label>移动电话</label>
                                 <br />
                                 <input type="text" placeholder="" className="phone"></input>
-                                <span className="phoneinfo">phone number is wrong</span>
+                                <span classNamebu="phoneinfo">phone number is wrong</span>
                             </div>
                             <button className="inputafterinfo" id="vcodeget" type="button">获取验证码</button>
                         </div>
