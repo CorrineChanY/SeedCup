@@ -201,7 +201,7 @@ render() {
                                 <label>移动电话</label>
                                 <br />
                                 <input type="text" placeholder="" className="phone"></input>
-                                <span classNamebu="phoneinfo">phone number is wrong</span>
+                                <span className="phoneinfo">phone number is wrong</span>
                             </div>
                             <button className="inputafterinfo" id="vcodeget" type="button">获取验证码</button>
                         </div>

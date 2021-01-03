@@ -10,6 +10,7 @@ import React from 'react'
 import "../signin/signin.css"
 import signin from "../../img/signin.png"
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { render } from '@testing-library/react';
 
 const base="/api";
@@ -48,6 +49,9 @@ function post(signinfo)
     .then(response => {
         console.log('/posts post',response.data)
     })
+    .catch(error=>{
+        console.log('error',error.message)
+    })
 }
 //submit
 async function submit(signinfo){
@@ -58,7 +62,7 @@ async function submit(signinfo){
     }
     let res=await signininfo.post("/login_user/",signininfo.info);
     if (res.code == 0)
-        window.location.href = "index.html";
+        window.location.href = '/index';
     else 
     this.x_alert("账号密码错误！");
 }
@@ -101,14 +105,15 @@ class SignIn extends React.Component{
 
                         <br />
                         <br />
-                    
-                        <button type="button" className="submitinfo"
+                    <Link to="/index">
+                        <button type="button" className="submitinfo" href="/index"
                         style={{
                             position:"absolute",
                             left:"10px"
                         }}>
                             登录
                         </button>
+                    </Link>
                     </div>
                     
                     
