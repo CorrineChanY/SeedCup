@@ -9,6 +9,66 @@
 import React from 'react'
 import "../signin/signin.css"
 import signin from "../../img/signin.png"
+import axios from 'axios'
+import { render } from '@testing-library/react';
+
+const base="/api";
+let signininfo={
+    username:"",
+    password:"",
+    alert:{title:"标题",txt:"我是文本"}
+}
+//get
+function get(signininfo)
+{
+    //axios.get('http://localhost:3000/post?id=1')
+    axios({
+        url:'/posts',
+        param:{
+            id:1
+        }
+    })
+    .then(response => {
+        console.log('/posts get',response.data)
+    })
+    .catch(error => {
+        console.log('error',error.message)
+    })
+}
+//post
+function post(signinfo)
+{
+   // axios.post('http://localhost:3000/post',{"title":"json-server3"})
+    axios({
+        url:'/post',
+        methods:'post',
+        data:{"title":"json-server3"}
+          
+    })
+    .then(response => {
+        console.log('/posts post',response.data)
+    })
+}
+//submit
+async function submit(signinfo){
+    if(signininfo.info.username==""&&signininfo.info.password=="")
+    {
+        this.x_alert("请填写完整信息");
+        return;
+    }
+    let res=await signininfo.post("/login_user/",signininfo.info);
+    if (res.code == 0)
+        window.location.href = "index.html";
+    else 
+    this.x_alert("账号密码错误！");
+}
+/* x_alert: function (txt, title = "提示") {
+     console.log("弹框")
+    $('#alert').modal('close');
+    this.Aalert.title = title;
+    this.Aalert.txt = txt;
+    setTimeout(() => $('#alert').modal('open'), 1000);
+}*/
 
 class SignIn extends React.Component{
     render() {
