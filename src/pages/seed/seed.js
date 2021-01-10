@@ -13,6 +13,7 @@ import intro from "../../img/introduce.png"
 import stick from "../../img/stick.png"
 import "../seed/seed.css"
 import axios from 'axios'
+import { render } from '@testing-library/react'
 let base = "/api";
 const teaminfo_model = {
     code:0,
@@ -139,43 +140,7 @@ async function reset(user){
     this.fileName=file.name;
 },*/
 
-async function submit(user){
-    if (filedata == new FormData()||user.seedcode=="") {
-        user.x_alert("数据有误");
-    }
-    filedata.append('seed', user.seedcode);
-    let formdata= await user.post('/upload_submit_txt/',filedata);
-    {
-        if (formdata.code == 114) {
-                user.x_alert("今日提交次数已到上限");
-                window.location.reload();
-            } else if (formdata.code == 107) {
-                user.x_alert("请先登陆");
-                window.location.reload();
-            } else if (formdata.code == 108) {
-                user.x_alert("您的队伍未晋级");
-                window.location.reload();
-            } else if (formdata.code == 115) {
-                user.x_alert("提交文件超过10M");
-                window.location.reload();
-            } else if (formdata.code == 116) {
-                user.x_alert("请提交标准格式的zip压缩包");
-                window.location.reload();
-            } else if (formdata.code == 0) {
-                user.x_alert("上传成功(´・ω・`)");
-                window.location.reload();
-            } else if (formdata.code == 100) {
-                user.x_alert("评分失败，请检查输出文件的格式");
-                window.location.reload();
-            } else if (formdata.code == 117) {
-                user.x_alert("文件内容不正确");
-                window.location.reload();
-            } else if (formdata.code == 119) {
-                user.x_alert("当前不可以提交");
-                window.location.reload();
-            }
-        }
-}
+
 async function handlechangeport(user){
     if(window.confirm("确定要创建或重置端口吗？")){
         let res = await this.post('/create_docker/', user.info);
@@ -199,73 +164,6 @@ async function getstage(user){
         //这里不会写
     }
 }
-async function getrank(user){
-    let data=await user.get('/get_score_steps/');
-    if(data.code==0){
-        user.rank=data.rank;
-        user.ranklist=data.finals_rank;
-    }else{
-        user.x_alert("排行榜信息获取失败！");
-    }
-}
-async function getmatch(user){
-    let matchinfo=await user.get('/get_match_game_info');
-    if(matchinfo.code===0){
-        return;
-        user.matches=matchinfo.matches;
-        var matchHTML="";
-        for(var data of user.matches){
-            let i=65;
-            while(data[String.fromCharCode[i]]){
-                let match=data[String.fromCharCode[i]];
-                ++i;
-                let ulistHTML="";
-                for(var j=0;j<4;++j){
-                    let ulist="<ul>"
-                    if(match.result){
-                        ulist="<ul>"
-                    + `<li>队名：${match.result[j][4]}</li>`
-                    + `<li>匹配排名：${match.result[j][0]}</li>`
-                    + `<li>分数：${match.result[j][1]}</li>`
-                    + `<li>步数：${match.result[j][2]}</li>`
-                    + `<li>错误提示：${match.result[j][3]}</li>`
-                    + "</ul>";
-            } else {
-                ulist = "<ul>"
-                    + `<li>组名：${match.teams[j]}</li>`
-                    + "</ul>";
-            }
-            ulistHTML += `<td>${ulist}</td>`;
-        }
-
-        let statusHTML = "";
-
-        if (!!match.result) {
-            statusHTML = "已完成";
-        } else {
-            statusHTML = match.progress;
-        }
-
-        /*matchHTML += "<tr>"
-            + `<td>${match.date}</td>`
-            + `<td>${statusHTML}</td>`
-            + ulistHTML
-            + "</tr>";*/
-    }
-}
-//tbody.innerHTML = matchHTML;
-    }else if(matchinfo.code===100){
-        user.x_alert("比赛信息获取失败");
-    }
-}
-async function getseed(user){
-    let data=await user.get('/get_daily_info/');
-    if(data.code==0){
-        user.seed_list=data.seed_list;
-    }else{
-        user.x_alert("每日seed信息获取失败！");
-    }
-}
 async function haisignin(user){
     let res=await user.get('/user-result/');
     if(res.message!="need login"){
@@ -273,7 +171,75 @@ async function haisignin(user){
         user.teaminfo=res;
     }
 }
+
 class Seed extends React.Component{
+    async getrank(user){
+        let data=await user.get('/get_score_steps/');
+        if(data.code==0){
+            user.rank=data.rank;
+            user.ranklist=data.finals_rank;
+        }else{
+            user.x_alert("排行榜信息获取失败！");
+        }
+    }
+    async getmatch(user){
+        let matchinfo=await user.get('/get_match_game_info');
+        if(matchinfo.code===0){
+            return;
+            user.matches=matchinfo.matches;
+            var matchHTML="";
+            for(var data of user.matches){
+                let i=65;
+                while(data[String.fromCharCode[i]]){
+                    let match=data[String.fromCharCode[i]];
+                    ++i;
+                    let ulistHTML="";
+                    for(var j=0;j<4;++j){
+                        let ulist="<ul>"
+                        if(match.result){
+                            ulist="<ul>"
+                        + `<li>队名：${match.result[j][4]}</li>`
+                        + `<li>匹配排名：${match.result[j][0]}</li>`
+                        + `<li>分数：${match.result[j][1]}</li>`
+                        + `<li>步数：${match.result[j][2]}</li>`
+                        + `<li>错误提示：${match.result[j][3]}</li>`
+                        + "</ul>";
+                } else {
+                    ulist = "<ul>"
+                        + `<li>组名：${match.teams[j]}</li>`
+                        + "</ul>";
+                }
+                ulistHTML += `<td>${ulist}</td>`;
+            }
+    
+            let statusHTML = "";
+    
+            if (!!match.result) {
+                statusHTML = "已完成";
+            } else {
+                statusHTML = match.progress;
+            }
+    
+            /*matchHTML += "<tr>"
+                + `<td>${match.date}</td>`
+                + `<td>${statusHTML}</td>`
+                + ulistHTML
+                + "</tr>";*/
+        }
+    }
+    //tbody.innerHTML = matchHTML;
+        }else if(matchinfo.code===100){
+            user.x_alert("比赛信息获取失败");
+        }
+    }
+    async getseed(user){
+        let data=await user.get('/get_daily_info/');
+        if(data.code==0){
+            user.seed_list=data.seed_list;
+        }else{
+            user.x_alert("每日seed信息获取失败！");
+        }
+    }
     render() {
         return(
             <div className="main-banner">
@@ -323,7 +289,43 @@ class Nav extends React.Component{
 }
 
 class Banner extends React.Component{
-    
+    async submit(user){
+        if (filedata == new FormData()||user.seedcode=="") {
+            user.x_alert("数据有误");
+        }
+        filedata.append('seed', user.seedcode);
+        let formdata= await user.post('/upload_submit_txt/',filedata);
+        {
+            if (formdata.code == 114) {
+                    user.x_alert("今日提交次数已到上限");
+                    window.location.reload();
+                } else if (formdata.code == 107) {
+                    user.x_alert("请先登陆");
+                    window.location.reload();
+                } else if (formdata.code == 108) {
+                    user.x_alert("您的队伍未晋级");
+                    window.location.reload();
+                } else if (formdata.code == 115) {
+                    user.x_alert("提交文件超过10M");
+                    window.location.reload();
+                } else if (formdata.code == 116) {
+                    user.x_alert("请提交标准格式的zip压缩包");
+                    window.location.reload();
+                } else if (formdata.code == 0) {
+                    user.x_alert("上传成功(´・ω・`)");
+                    window.location.reload();
+                } else if (formdata.code == 100) {
+                    user.x_alert("评分失败，请检查输出文件的格式");
+                    window.location.reload();
+                } else if (formdata.code == 117) {
+                    user.x_alert("文件内容不正确");
+                    window.location.reload();
+                } else if (formdata.code == 119) {
+                    user.x_alert("当前不可以提交");
+                    window.location.reload();
+                }
+            }
+    }
     render() {
         return(
             <div className="containtent">
@@ -334,7 +336,9 @@ class Banner extends React.Component{
                 </Link>
 
                 <Link to="">
-                    <button className="btn-large join-button"style={{position:"relative", top: "70%",left:"20px"}}>
+                    <button className="btn-large join-button"
+                            onclick={this.submit}
+                            style={{position:"relative", top: "70%",left:"20px"}}>
                         提交结果
                     </button>
                 </Link>
@@ -342,7 +346,7 @@ class Banner extends React.Component{
         )
     }
 }
-
+//提交试题需要模态框
 
 class Head1 extends React.Component{
     render() {
