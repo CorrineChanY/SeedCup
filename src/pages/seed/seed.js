@@ -12,11 +12,15 @@ import seedlogo from "../../img/seedlogo.png"
 import intro from "../../img/introduce.png"
 import stick from "../../img/stick.png"
 import "../seed/seed.css"
+import {Table} from "../../../src/component/Table"
+import axios from "axios"
+
+const base = 'http://yapi.holdice.club/mock/11';
 
 class Seed extends React.Component{
     render() {
         return(
-            <div className="main-banner">
+            <div className="main-banner" style={{overflowX: "hidden"}}>
                 <Nav />
                 <Banner />
                 <img src={seedlogo} alt="seedlogo" style={{position: "absolute", left: "20px", top: "15px"}}/>
@@ -32,6 +36,10 @@ class Seed extends React.Component{
                     </div>
                 </div>
                 <Head1 />
+                <Publish />
+                <Lister />
+                <Percenter />
+                <Playback />
                 
                 {this.props.children}
             </div>
@@ -86,7 +94,7 @@ class Banner extends React.Component{
 class Head1 extends React.Component{
     render() {
         return(
-            <div id="head1">
+            <div id="head1" className="active">
                 <div className="page-container">
                     <div className="page1-container">
                         <div className="page1-inner">
@@ -225,4 +233,132 @@ class Head1 extends React.Component{
     }
 }
 
+
+class Publish extends React.Component{
+    render() {
+        {
+            let columns = [
+                {
+                    name: "时间",
+                    dataIndex: "time"
+                },
+                {
+                    name: "10月17日",
+                    dataIndex: "_10_17"
+                },
+                {
+                    name: "10月20日",
+                    dataIndex: "_10_20"
+                },
+                {
+                    name: "10月23日",
+                    dataIndex: "_10_23"
+                },
+                {
+                    name: "10月26日",
+                    dataIndex: "_10_26"
+                },
+                {
+                    name: "10月29日",
+                    dataIndex: "_10_29"
+                },
+                {
+                    name: "11月1日-1",
+                    dataIndex: "_11_1_1"
+                },
+                {
+                    name: "11月1日-2",
+                    dataIndex: "_11_1_2"
+                },
+                {
+                    name: "11月1日-3",
+                    dataIndex: "_11_1_3"
+                },
+                {
+                    name: "11月1日-4",
+                    dataIndex: "_11_1_4"
+                },
+                {
+                    name: "11月1日-5",
+                    dataIndex: "_11_1_5"
+                },
+            ];
+            let data = [
+                {
+                    time: "Seed",
+                    _10_17: "2020",
+                    _10_20: "623500535",
+                    _10_23: "700383151",
+                    _10_26: "507690622",
+                    _10_29: "41420402",
+                    _11_1_1: "27655418",
+                    _11_1_2: "1155797526",
+                    _11_1_3: "16161825",
+                    _11_1_4: "399404774",
+                    _11_1_5: "233820437"
+                }
+            ]
+            // var table = Table(data, columns, {
+            //     className: "striped",
+            //     caption: "决赛决赛",
+            //     id: "finalrank"
+            // });
+        }
+
+        // return table;
+        return(
+            <div id="publish">
+                <h1>This is Publish!</h1>
+            </div>
+        )
+    }
+}
+
+class Lister extends React.Component{
+    getData = () => {
+        axios.get(base + '/api/team/info')
+        .then(function (response){
+            // handle success
+            console.log(response);
+        })
+        .catch(function (error){
+            // handle error
+            console.log(error);
+        })
+        .then(function (){
+            // always executed
+        });
+    }
+
+    render() {
+        return(
+            <div id="lister">
+                <h1>This is Lister!</h1>
+                <button onClick={this.getData}>
+                    获取数据
+                </button>
+            </div>
+        )
+    }
+}
+
+class Percenter extends React.Component{
+    render() {
+        return(
+            <div id="percenter">
+                <h1>This is Percenter!</h1>
+            </div>
+        )
+    }
+}
+
+class Playback extends React.Component{
+    render() {
+        return(
+            <div id="playback">
+                <h1>敬请期待</h1>
+            </div>
+        )
+    }
+}
 export default Seed;
