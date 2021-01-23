@@ -39,7 +39,7 @@ export function Table(dataSource, columns, props) {
     table.appendChild(tb);
     
     for (var key in props) {
-        if(key != "caption"){
+        if(key !== "caption"){
             table.setAttribute(key, props[key]);
         }
     }

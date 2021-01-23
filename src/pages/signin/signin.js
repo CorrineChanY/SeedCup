@@ -6,12 +6,57 @@
  * @createDate 2020-12-15
  */
 
-import React from 'react'
+import React, { useState } from 'react'
 import "../signin/signin.css"
 import signin from "../../img/signin.png"
+import axios from "axios"
+import interceptors from "../../interceptors"
 
-class SignIn extends React.Component{
-    render() {
+const base = 'http://www.holdice.club:8087';
+
+
+function SignIn() {
+
+    const [usr, setUsr] = useState("");
+    const [pass, setPass] = useState("");
+
+    function handleUsrInput(e) {
+        setUsr(e.target.value)
+    }
+
+    function handlePassInput(e) {
+        setPass(e.target.value)
+    }
+
+    function logIn() {
+        // 拦截器在interceptors.js
+        axios.post(base + '/api/user/log_in', {
+            username: usr,
+            password: pass
+        },{
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+            if(response.data.code === "0" && response.data.message === "success"){
+                alert("登陆成功！");
+            }else{
+                alert("登陆失败！");
+            }
+        })
+        .catch(function (error) {
+            // console.log(error);
+            alert(error);
+        });
+
+        
+    }
+
+    
+
+    // render() {
         return(
             <div className="maintain">
                 <div className="pdleft">
@@ -28,13 +73,13 @@ class SignIn extends React.Component{
                         <form>
                             <label>用户名</label>
                             <br />
-                            <input type="text" placeholder="请用手机号登录" style={{width:"40%"}}></input>
+                            <input onInput={handleUsrInput} type="text" placeholder="请用手机号或邮箱登录" style={{width:"40%"}}></input>
                             <br />
                             <br />
                             <br />
                             <label>密码</label>
                             <br />
-                           <input type="password" style={{width:"40%"}}></input>
+                           <input onInput={handlePassInput} type="password" style={{width:"40%"}}></input>
                             <br />
                             <span style={{position:"relative", left: "48%"}}><a href="/#/signup" style={{color:"white", textDecoration:"none"}}>sign up</a></span>
                         </form>
@@ -46,7 +91,8 @@ class SignIn extends React.Component{
                         style={{
                             position:"absolute",
                             left:"10px"
-                        }}>
+                        }} 
+                        onClick={logIn}>
                             登录
                         </button>
                     </div>
@@ -71,7 +117,7 @@ class SignIn extends React.Component{
                 </div>
         </div>
         )
-    }
+    // }
 };
 
 export default SignIn;
