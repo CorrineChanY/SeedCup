@@ -6,14 +6,14 @@
  * @createDate 2020-12-15
  */
 
-import React from 'react'
+import React,{useState} from 'react'
 import "../signin/signin.css"
 import signin from "../../img/signin.png"
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { render } from '@testing-library/react';
 
-const base="/api";
+const base='http://www.hodice.club:8087';
 let signininfo={
     username:"",
     password:"",
