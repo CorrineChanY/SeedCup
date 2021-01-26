@@ -6,11 +6,13 @@
  * @createDate 2020-12-15
  */
 
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+// import { Link } from 'react-router-dom'
 import "../signup/signup.css"
+import "../../materialize.css"
 import axios from 'axios'
 import interceptors from "../../interceptors"
+import checkPhone from "../../misc/utils"
 
 // import Qs from 'qs'
         // this.getCaptcha = this.getCaptcha.bind(this);
@@ -20,6 +22,158 @@ import interceptors from "../../interceptors"
         //     },
         // }
 const base = 'http://www.holdice.club:8087';
+
+// 此处的封装就交给萌宝了
+
+
+// function SignUp() {
+//   const[user, setUser] = useState("");
+//   const[psw, setPsw] = useState("");
+//   const[school, setSchool] = useState("");
+//   const[college, setCollege] = useState("");
+//   const[className, setClass] = useState("");
+//   const[phone, setPhone] = useState("");
+//   const[captcha, setCaptcha] = useState("");
+//   const[email, setEmail] = useState("");
+//   const[rePsw, setRePsw] = useState("");
+
+//   /**
+//      * 手机号是否合法 + value是否为`string`
+//      * 如果不合法，需要alert提示（或者在页面上显示，这样更友好，但是我不会），并清空输入框
+//      * 同一手机号90s内不能重复
+//      * ToDo：获取验证码之后那个按钮变成 灰色的 90秒倒计时 不能按
+//      */
+//     function getCaptcha() {
+//       // console.log('phone: '+this.state.phone);
+//       if(checkPhone(this.state.phone) !== 1 ){
+//           alert("请输入正确的手机号!");
+//           setPhone("");
+//           return;
+//       }
+
+//       axios.get('/api/sms/send_captcha', {
+//           params:{
+//               phoneNumber: this.state.phone
+//           }
+//       })
+//       .then(function (response) {
+//           // handle success
+//           console.log(response);
+//         })
+//         .catch(function (error) {
+//           // handle error
+//           console.log(error);
+//         })
+
+//   }
+
+
+//   function chufa(e) {
+    
+//   }
+
+//   /**
+//    * 封装handleXXXInput()
+//    * @param {object} func  函数指针，例如setUser
+//    * @param {string} value 输入值
+//    */
+//   function handleInput(func, value) {
+//     func(value);
+//     console.log(value);
+//   }
+  
+//   return(
+//     <div className="content">
+
+//       <div className="head">        
+//         <h style={{fontSize: "35px"}}>微派·种子杯 </h>
+//         <font  style={{fontSize:"35px", color:"rgb(50,187,255)"}}>|</font>
+//         <small style={{fontSize: "20px"}}>软件编程PK赛报名表</small>
+//       </div>
+
+//       <br /><br/><br/>
+//       <br/><br/><br/>
+
+//       {/*method="post" action={base + '/api/user/sign_up'} name="register" encType="application/json" target="/index"*/}
+//       <form > 
+//         <div className="captain">
+//             <div className= "groupinfo" style={{height:"65px"}}>参赛者信息</div>
+//             <br />
+//             <br />
+//             <label>姓名</label>
+//             <br />
+//             <input type="text" placeholder="" onInput={handleInput(setUser, this.value)}></input>
+//             <br />
+//             <br />
+//             <label>学校</label>
+//             <br />
+//             <input type="text" placeholder="" onInput={handleInput(setSchool, this.value)}></input>
+//             <br />
+//             <br />
+//             <label>所在院系</label>
+//             <br />
+//             <input type="text" placeholder="" onInput={handleInput(setCollege, this.value)}></input>
+//             <br />
+//             <br />
+//             <label>专业班级</label>
+//             <br />
+//             <input type="text" placeholder="" onInput={handleInput(setClass, this.value)}></input>
+//             <br />
+//             <br />
+//             <div style={{display:"flex"}}>
+//                 <div style={{flex:"1"}}>
+//                     <label>移动电话</label>
+//                     <br />
+//                     <input type="text" placeholder="" className="phone" onInput={handleInput(setPhone, this.value)} value={phone}></input>
+//                     <span className="phoneinfo">phone number is wrong</span>
+//                 </div>
+//                 <button className="inputafterinfo" id="vcodeget" type="button" onClick={getCaptcha}>获取验证码</button>
+//             </div>
+//             <br />
+//             <label>验证码</label>
+//             <br />
+//             <input type="text" placeholder="" onInput={handleInput(setCaptcha, this.value)}></input>
+//             <br />
+//             <br />
+//             <label >Email</label>
+//             <br />
+//             <input type="text" placeholder="" className="email" onInput={handleInput(setEmail, this.value)}></input>
+//             <span className="emailinfo">email is wrong</span>
+//             <br />
+//             <br />
+//             <label>密码</label>
+//             <br />
+//             <input type="password" placeholder="" id="password" onInput={handleInput(setPsw, this.value)}></input>
+//             <br />
+//             <br />
+//             <label>确认密码</label>
+//             <br />
+//             <input type="password" placeholder="" id="confpassword" onInput={handleInput(setRePsw, this.value)}></input>
+//             <small color="red" style={{display:"none"}} id="gg">*两次密码输入要一样哦 (´・ω・`)  </small>
+//         </div>
+
+//         <div className="allmem">
+            
+        
+//         </div>             
+//         <br /><br /><br />
+        
+//         <br /><br /><br />
+
+//         {/*用form表单post的时候才用这个button*/}
+//         {/* <button type="submit" style={{position:"inherit"}} className="inputafterinfo">
+//             提交
+//         </button>   */}
+
+//         <button className="submitinfo">
+//             确认提交
+//         </button>
+//       </form>
+
+//     </div>
+//   )
+// }
+
 
 class SignUp extends React.Component{
     constructor(props) {
@@ -31,7 +185,7 @@ class SignUp extends React.Component{
             college: "", // 学院
             class: "", // 班级
             phone: "",
-            captcha: "", //验证码
+            captcha: "", // 验证码
             email: ""
         };
 
@@ -49,6 +203,7 @@ class SignUp extends React.Component{
      * 手机号是否合法 + value是否为`string`
      * 如果不合法，需要alert提示（或者在页面上显示，这样更友好，但是我不会），并清空输入框
      * 同一手机号90s内不能重复
+     * ToDo：获取验证码之后那个按钮变成 灰色的 90秒倒计时 不能按
      */
     getCaptcha = () => {
         // console.log('phone: '+this.state.phone);
@@ -56,8 +211,7 @@ class SignUp extends React.Component{
             alert("请输入正确的手机号!");
             this.setState({
                 phone: ""
-            })
-            this.myInput.focus()
+            });
             return;
         }
 
@@ -77,30 +231,13 @@ class SignUp extends React.Component{
 
     }
 
-    /* 验证手机号 */
-    checkPhone(value) {
-        // var regex = /^((\+)?86|((\+)?86)?)0?1[3458]\d{9}$/; 
-        var regex = /^1[3458]\d{9}$/; 
-        if (value) {
-            // react使用正则表达式变量的test方法进行校验
-            // 直接使用value.match(regex)显示match未定义
-            if (regex.test(value)) { 
-                // callback();
-                return 1;
-            } else { 
-                // callback('请输入正确的手机号码！');
-                return 0;
-            }
-        } else {
-            // 这里的callback函数会报错
-            return 100;
-        }
-    }
+    
 
     /**
      * 1. 验证码是否正确
      * 2. 是否有重复字段
-     * 3. 
+     * 3. comfirm密码是否一致
+     * 4. 
      */
     handleSubmit = () => {
         axios.post(
@@ -115,6 +252,12 @@ class SignUp extends React.Component{
         .catch(function (error) {
             console.log(error);
         })
+    }
+
+    handleInput(stateName, value) {
+      this.setState({
+        stateName: value
+      })
     }
 
     handleUsrnameInput(e) {
@@ -178,8 +321,8 @@ class SignUp extends React.Component{
                     </div>
                     <br /><br/><br/>
                     <br/><br/><br/>
-                        {/*method="post" action={base + '/api/user/sign_up'} name="register" encType="application/json" target="/index"*/}
-                        <form > 
+                        
+                        <form method="post" action='/api/user/sign_up' name="register" encType="application/json" target="/index"> 
                             <div className="captain">
                                 <div className= "groupinfo" style={{height:"65px"}}>参赛者信息</div>
                                 <br />
@@ -208,7 +351,7 @@ class SignUp extends React.Component{
                                     <div style={{flex:"1"}}>
                                         <label>移动电话</label>
                                         <br />
-                                        <input type="text" placeholder="" className="phone" onInput={this.handlePhoneInput} ref={myInput=>this.myInput=myInput}></input>
+                                        <input type="text" placeholder="" className="phone" onInput={this.handlePhoneInput} value={this.state.phone}></input>
                                         <span className="phoneinfo">phone number is wrong</span>
                                     </div>
                                     <button className="inputafterinfo" id="vcodeget" type="button" onClick={this.getCaptcha}>获取验证码</button>
@@ -244,10 +387,10 @@ class SignUp extends React.Component{
                             
                             <br /><br /><br />
 
-                            {/*用form表单post的时候才用这个button*/}
-                            {/* <button type="submit" style={{position:"inherit"}} className="inputafterinfo">
+                            {/*用form表单post的时候,用这个button*/}
+                            <button type="submit" style={{position:"inherit"}} className="inputafterinfo">
                                 提交
-                            </button>   */}
+                            </button>  
 
                             <button className="submitinfo" onClick={this.handleSubmit}>
                                 确认提交

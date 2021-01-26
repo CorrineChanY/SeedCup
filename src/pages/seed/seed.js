@@ -13,39 +13,44 @@ import intro from "../../img/introduce.png"
 import stick from "../../img/stick.png"
 import "../seed/seed.css"
 import {Table} from "../../../src/component/Table"
+import TabsControl from "../../component/Tab"
 import axios from "axios"
 
 const base = 'http://yapi.holdice.club/mock/11';
 
-class Seed extends React.Component{
-    render() {
-        return(
-            <div className="main-banner" style={{overflowX: "hidden"}}>
-                <Nav />
-                <Banner />
-                <img src={seedlogo} alt="seedlogo" style={{position: "absolute", left: "20px", top: "15px"}}/>
-                <div className="row">
-                    <div className="container contenter">
-                        <ul className="tabs" style={{width:"105%"}}>
-                            <li className="tab col s2 taber"><a href="#head1">大赛首页</a></li>
-                            <li className="tab col s2 taber"><a href="#publish">比赛信息</a></li>
-                            <li className="tab col s2 taber"><a href="#lister">排行榜</a></li>
-                            <li className="tab col s2 taber"><a href="#percenter">我的队伍</a></li>
-                            <li className="tab col s2 taber"><a href="#playback">赛局回放</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <Head1 />
-                <Publish />
-                <Lister />
-                <Percenter />
-                <Playback />
-                
-                {this.props.children}
-            </div>
-        )
-    }
-};
+function Seed() {
+  return(
+      <div className="main-banner" style={{overflowX: "hidden"}}>
+          <Nav />
+          <Banner />
+          <img src={seedlogo} alt="seedlogo" style={{position: "absolute", left: "20px", top: "15px"}}/>
+          {/* <div className="row">
+              <div className="container contenter">
+                  <ul className="tabs" style={{width:"105%"}}>
+                      <li className="tab col s2 taber"><a href="#head1">大赛首页</a></li>
+                      <li className="tab col s2 taber"><a href="#publish">比赛信息</a></li>
+                      <li className="tab col s2 taber"><a href="#lister">排行榜</a></li>
+                      <li className="tab col s2 taber"><a href="#percenter">我的队伍</a></li>
+                      <li className="tab col s2 taber"><a href="#playback">赛局回放</a></li>
+                  </ul>
+              </div>
+          </div>
+          <Head1 />
+          <Publish />
+          <Lister />
+          <Percenter />
+          <Playback /> */}
+          {TabsControl([
+            <Head1 name="大赛首页"/>,
+            <Publish name="比赛信息"/>,
+            <Lister name="排行榜"/>,
+            <Percenter name="我的队伍"/>,
+            <Playback name="赛局回放"/>
+          ])}
+          
+      </div>
+  )
+}
 
 class Nav extends React.Component{
     render() {

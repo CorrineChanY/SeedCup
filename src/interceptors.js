@@ -1,6 +1,6 @@
 /**
  * 拦截器
- * 所有拦截器写在一起
+ * 所有拦截器写在一起, 都是错误的情况
  * 在使用的时候需要import这个.js
  * @file interceptors.js
  * @author 
@@ -25,6 +25,12 @@ axios.interceptors.response.use(function (response) {
                 throw new Error("用户名不能为空！");
             }else if(response.data.data === "Empty password" && response.data.message === "value invalid"){
                 throw new Error("密码不能为空！");
+            }
+            break;
+        case "997":
+            console.log("code: 997");
+            if(response.data.message === "apply captcha too frequently" && response.data.data === null){
+                throw new Error("获取验证码太频繁！");
             }
             break;
         default:
