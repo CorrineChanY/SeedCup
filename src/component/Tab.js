@@ -1,4 +1,12 @@
-import React, { useState } from 'react'
+/**
+ * tab切换(函数&类)组件
+ * @file Tab.js
+ * @author cy
+ * @copyright 
+ * @createDate 2021-01-26
+ */
+
+import { useState } from 'react'
 import "../pages/seed/seed.css"
 
 
@@ -8,10 +16,6 @@ function TabsControl(children){
   function check_tittle_index(index) {
     return index === currentIndex ? "Tab_tittle active" : "Tab_tittle";
   }
-
-  // function check_item_index(index) {
-  //   return index === currentIndex ? "Tab_item show" : "Tab_item";
-  // }
 
   function check_item_display(index){
     return index===currentIndex ? "block" : "none";
@@ -74,6 +78,10 @@ function TabComponent() {
   )
 }
 
+export default TabsControl;
+
+
+/*     下面是使用class组件时的用法      */
 
 // class TabsControl extends React.Component{
 
@@ -148,8 +156,7 @@ function TabComponent() {
 //     }
 // }
 
-// export default TabComponent;
-export default TabsControl;
+
 
 
 /**首先我们定义了一个子组件叫TabsControl ，然后我们遍历它的子标签。子标签的内容从哪里来呢，是在该组件里面的name值那里获取。
@@ -164,63 +171,3 @@ React.Children.map（）来配合进行遍历。
 
 　　通过上面的这段代码，我们就很方便的进行遍历了。比如一个页面需要有多个tab切换，那么我们只需要引入这个TabsControl 一次就可以了。
 */
-
-// import React from 'react';
-
-// class NewsList extends React.Component {
-
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             tabs:[
-//                 {tabName:"社会新闻",id:1},
-//                 {tabName:"体育世界",id:2},
-//                 {tabName:"娱乐圈",id:3},
-//             ],
-//             currentIndex:1,
-//         };
-//     }    
-//     componentDidMount() {
-        
-//     }
-//     tabChoiced=(id)=>{
-//         //tab切换到方法
-//         this.setState({
-//             currentIndex:id
-//         });
-//     }
-//     render(){
-//         var _this=this;
-//         var isBox1Show=this.state.currentIndex==1 ? 'block' : 'none';
-//         var isBox2Show=this.state.currentIndex==2 ? 'block' : 'none';
-//         var isBox3Show=this.state.currentIndex==3 ? 'block' : 'none';
-
-//           var tabList= this.state.tabs.map(function(res,index) {
-//               // 遍历标签页，如果标签的id等于tabid，那么该标签就加多一个active的className
-//             var tabStyle=res.id==this.state.currentIndex ? 'subCtrl active' : 'subCtrl';
-
-//             return    <li key={index} onClick={this.tabChoiced.bind(_this,res.id)} className={tabStyle}>{res.tabName}</li>
-
-//         }.bind(_this));
-//         return (
-//             <div className="listWrap">
-//                 <ul className="subNavWrap">
-//                     {tabList}
-//                 </ul>
-//                 <div className="newsList">
-//                     <div style={{"display":isBox1Show}} >
-//                         社会新闻
-//                     </div>
-//                     <div style={{"display":isBox2Show}}>
-//                         体育世界
-//                     </div>
-//                     <div style={{"display":isBox3Show}}>
-//                         娱乐圈
-//                     </div>
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
-
-// export default NewsList;

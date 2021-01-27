@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 import "../signup/signup.css"
 import "../../materialize.css"
 import axios from 'axios'
-import interceptors from "../../interceptors"
+import "../../misc/interface"
 import checkPhone from "../../misc/utils"
 
 // import Qs from 'qs'
@@ -321,8 +321,8 @@ class SignUp extends React.Component{
                     </div>
                     <br /><br/><br/>
                     <br/><br/><br/>
-                        
-                        <form method="post" action='/api/user/sign_up' name="register" encType="application/json" target="/index"> 
+                        {/**method="post" action='/api/user/sign_up' name="register" encType="application/json" target="/index" */}
+                        <form > 
                             <div className="captain">
                                 <div className= "groupinfo" style={{height:"65px"}}>参赛者信息</div>
                                 <br />
@@ -388,9 +388,9 @@ class SignUp extends React.Component{
                             <br /><br /><br />
 
                             {/*用form表单post的时候,用这个button*/}
-                            <button type="submit" style={{position:"inherit"}} className="inputafterinfo">
+                            {/* <button type="submit" style={{position:"inherit"}} className="inputafterinfo">
                                 提交
-                            </button>  
+                            </button>   */}
 
                             <button className="submitinfo" onClick={this.handleSubmit}>
                                 确认提交

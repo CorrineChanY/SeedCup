@@ -10,11 +10,6 @@ function App() {
     return(
       <>
         <Rt />
-        {/* <Link to="/index">
-            <button className="btn-large join-button">
-                index
-            </button>
-        </Link> */}
       </>
     )
 }

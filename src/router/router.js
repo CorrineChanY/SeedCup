@@ -32,11 +32,6 @@ class Rt extends React.Component{
                     {/* <Route path="/" component={App}/> */}
                     {/* <Route path="/download_doc" component={Download_btn}/> */}
 
-                    <Link to="/index">
-                        <button className="btn-large join-button">
-                            index
-                        </button>
-                    </Link>
                 </Router>
             </>
         )

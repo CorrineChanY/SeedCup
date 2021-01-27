@@ -183,7 +183,8 @@
   
     /*第二页*/
     .page2-inner {
-      margin: 80px auto 0;
+      /* margin: 80px auto 0; */
+      margin: 0;
     }
   
     .page2-part1,
