@@ -19,64 +19,66 @@ const instance = axios.create({
   headers: {'Content-Type': CONTENT_TYPE}
 });
 
-export function API() {
-  function SignIn(data) {
-    instance.post(api.login, data)
-  }
+// export function API() {
+//   function SignIn(data) {
+//     instance.post(api.login, data)
+//   }
 
-  function SignUp() {
+//   function SignUp() {
 
-  }
-}
+//   }
+// }
 
-/**
- * @description get方法，对应get请求
- * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
- */
-export function get(url, params){    
-  return new Promise((resolve, reject) =>{        
-      instance.get(url, {            
-          params: params        
-      }).then(res => {
-          // resolve(res.data);
-        console.log(res.data);
-      }).catch(err =>{
-        console.log(err.data);
-        // reject(err.data)        
-  })    
-});}
+// /**
+//  * @description get方法，对应get请求
+//  * @param {String} url [请求的url地址]
+//  * @param {Object} params [请求时携带的参数]
+//  */
+// export function get(url, params){    
+//   return new Promise((resolve, reject) =>{        
+//       instance.get(url, {            
+//           params: params        
+//       }).then(res => {
+//           // resolve(res.data);
+//         console.log(res.data);
+//       }).catch(err =>{
+//         console.log(err.data);
+//         // reject(err.data)        
+//   })    
+// });}
 
-/** 
- * @description post方法，对应post请求 
- * @param {String} url [请求的url地址] 
- * @param {Object} params [请求时携带的参数] 
- */
-export function post(url, params) {
-  return new Promise((resolve, reject) => {
-    instance.post(url, Qs.stringify(params))
-    .then(res => {
-        // resolve(res.data);
-        console.log(res.data);
-    })
-    .catch(err =>{
-        // reject(err.data);
-        console.log(err.data);
-    })
-  });
-}
+// /** 
+//  * @description post方法，对应post请求 
+//  * @param {String} url [请求的url地址] 
+//  * @param {Object} params [请求时携带的参数] 
+//  */
+// export function post(url, params) {
+//   return new Promise((resolve, reject) => {
+//     instance.post(url, Qs.stringify(params))
+//     .then(res => {
+//         // resolve(res.data);
+//         console.log(res.data);
+//     })
+//     .catch(err =>{
+//         // reject(err.data);
+//         console.log(err.data);
+//     })
+//   });
+// }
 
 // a response interceptor
-instance.interceptors.response.use(function (response) {
+// 现在还没封装好，只能先写成axios，之后会改成instance
+axios.interceptors.response.use(function (response) {
+  console.log(response);
   switch(response.data.code){
-      case "100":
-          console.log("code: 100");
-          if(response.data.data === null && response.data.message === "failed"){
-              throw new Error("用户名或密码不正确！");
+      case "-1":
+          console.log("code: -1")
+          if(response.data.data === null && response.data.message === "failed") {
+            throw new Error("用户名或密码不正确");
           }
           break;
-      case "103":
-          console.log("code: 103");
+      case "102":
+          console.log("code: 102");
           if(response.data.data === "Empty username" && response.data.message === "value invalid"){
               throw new Error("用户名不能为空！");
           }else if(response.data.data === "Empty password" && response.data.message === "value invalid"){
@@ -96,11 +98,12 @@ instance.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   return Promise.reject(error);
+  // return error;
 });
 
 
 // a request interceptor
-instance.interceptors.request.use(function (config) {
+axios.interceptors.request.use(function (config) {
   // Do something before request is sent
   return config;
 }, function (error) {

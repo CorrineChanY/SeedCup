@@ -40,12 +40,8 @@ function SignIn() {
           }
       })
       .then(function (response) {
-          console.log(response);
-          if(response.data.code === "0" && response.data.message === "success"){
-              alert("登陆成功！");
-          }else{
-              alert("登陆失败！");
-          }
+          // console.log(response);
+          alert("登陆成功！");
       })
       .catch(function (error) {
           // console.log(error);

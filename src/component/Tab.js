@@ -8,6 +8,7 @@
 
 import { useState } from 'react'
 import "../pages/seed/seed.css"
+import "../materialize.css"
 
 
 function TabsControl(children){
@@ -22,13 +23,14 @@ function TabsControl(children){
   }
 
   return(
-    <div>
+    <div >
       {/**动态生成Tab导航 */}
-      <div>
+      {/* check_tittle_index(index) */}
+      <div className="tabs">
         {
           children.map( (element, index) => {
             return(
-              <button onClick={ () => { setIndex(index)} } className={ check_tittle_index(index) }>
+              <button onClick={ () => { setIndex(index)} } className="tab col s2 taber" style={{color:"black"}}>
                 {element.props.name}
               </button>
             );
