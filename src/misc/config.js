@@ -6,13 +6,13 @@
  * @createDate 2021-01-27
  */
 
-export const BASE_URL = 'http://yapi.holdice.club/mock/11';
+export const BASE_URL = 'http://www.holdice.club:8087';
 
 export const TIMEOUT = 5000;
 
 export const CONTENT_TYPE = 'application/json'; 
 
-export const api = {
+export const URL = {
   login : '/api/user/log_in',
   logout : '/api/user/log_out',
   signup : '/api/user/sign_up',
@@ -25,5 +25,6 @@ export const api = {
   editteam : '/api/team/edit_introduction',
   addmember : '/api/team/member/add/{userId}',
   delemember : '/api/team/member/delete/{userId}',
-  teaminfo : '/api/team/info'
+  teaminfo : '/api/team/info',
+  rank : '/api/rank'
 }

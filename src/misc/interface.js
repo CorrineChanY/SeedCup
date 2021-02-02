@@ -9,8 +9,7 @@
 
 import axios from "axios"
 import Qs from "qs"
-import { BASE_URL, TIMEOUT, CONTENT_TYPE, api} from '../misc/config'
-
+import { BASE_URL, TIMEOUT, CONTENT_TYPE, URL} from '../misc/config'
 
 
 const instance = axios.create({
@@ -19,15 +18,76 @@ const instance = axios.create({
   headers: {'Content-Type': CONTENT_TYPE}
 });
 
-// export function API() {
-//   function SignIn(data) {
-//     instance.post(api.login, data)
-//   }
+export const API = {
 
-//   function SignUp() {
+  SignIn : function (data) {return instance.post(URL.login, data);},
 
-//   }
-// }
+  getCaptcha: function (phone) {
+    return instance.get(URL.getcap, {
+      params: phone
+    })
+  },
+
+  SignUp : function (data) {return instance.post(URL.signup, data);},
+
+  getRank : function(status) {
+    return instance.get(URL.rank, {
+      params: status // 注意status是对象{gameStatus: xxx}
+    })
+  }
+}
+
+
+
+// a response interceptor
+instance.interceptors.response.use(function (response) {
+  console.log(response);
+  switch(response.data.code){
+      case "-1":
+          console.log("code: -1")
+          if(response.data.data === null && response.data.message === "failed") {
+            throw new Error("用户名或密码不正确");
+          }
+          break;
+      case "102":
+          console.log("code: 102");
+          if(response.data.data === "Empty username" && response.data.message === "value invalid"){
+              throw new Error("用户名不能为空！");
+          }else if(response.data.data === "Empty password" && response.data.message === "value invalid"){
+              throw new Error("密码不能为空！");
+          }
+          break;
+      case "997":
+          console.log("code: 997");
+          if(response.data.message === "apply captcha too frequently" && response.data.data === null){
+              throw new Error("获取验证码太频繁！");
+          }
+          break;
+      case "105":
+          console.log("code: 105");
+          if(response.data.message === "verification code error" && response.data.data === null){
+            throw new Error("验证码错误！");
+          }
+          break;
+      default:
+          console.log("default");
+          break;
+  }
+  return response;
+}, function (error) {
+  return Promise.reject(error);
+  // return error;
+});
+
+
+// a request interceptor
+instance.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
 
 // /**
 //  * @description get方法，对应get请求
@@ -65,52 +125,5 @@ const instance = axios.create({
 //     })
 //   });
 // }
-
-// a response interceptor
-// 现在还没封装好，只能先写成axios，之后会改成instance
-axios.interceptors.response.use(function (response) {
-  console.log(response);
-  switch(response.data.code){
-      case "-1":
-          console.log("code: -1")
-          if(response.data.data === null && response.data.message === "failed") {
-            throw new Error("用户名或密码不正确");
-          }
-          break;
-      case "102":
-          console.log("code: 102");
-          if(response.data.data === "Empty username" && response.data.message === "value invalid"){
-              throw new Error("用户名不能为空！");
-          }else if(response.data.data === "Empty password" && response.data.message === "value invalid"){
-              throw new Error("密码不能为空！");
-          }
-          break;
-      case "997":
-          console.log("code: 997");
-          if(response.data.message === "apply captcha too frequently" && response.data.data === null){
-              throw new Error("获取验证码太频繁！");
-          }
-          break;
-      default:
-          console.log("default");
-          break;
-  }
-  return response;
-}, function (error) {
-  return Promise.reject(error);
-  // return error;
-});
-
-
-// a request interceptor
-axios.interceptors.request.use(function (config) {
-  // Do something before request is sent
-  return config;
-}, function (error) {
-  // Do something with request error
-  return Promise.reject(error);
-});
-
-
 
 

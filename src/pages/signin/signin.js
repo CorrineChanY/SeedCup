@@ -12,6 +12,7 @@ import "../../materialize.css"
 import signin from "../../img/signin.png"
 import axios from "axios"
 import "../../misc/interface"
+import { API } from '../../misc/interface'
 
 axios.defaults.baseURL = 'http://www.holdice.club:8087';
 axios.defaults.timeout = 5000;
@@ -29,24 +30,32 @@ function SignIn() {
         setPass(e.target.value)
     }
 
-    function logIn() {
+    async function logIn() {
       // 拦截器在interface.js
-      axios.post('/api/user/log_in', {
-          username: usr,
-          password: pass
-      },{
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      })
-      .then(function (response) {
-          // console.log(response);
-          alert("登陆成功！");
-      })
-      .catch(function (error) {
-          // console.log(error);
-          alert(error);
-      });
+      try {
+        const r = await API.SignIn({username: usr, password: pass});
+        alert("登陆成功！");
+      } catch (error) {
+        console.log(error);
+        alert(error);
+      }
+      
+    //   axios.post('/api/user/log_in', {
+    //       username: usr,
+    //       password: pass
+    //   },{
+    //       headers: {
+    //           'Content-Type': 'application/json'
+    //       }
+    //   })
+    //   .then(function (response) {
+    //       // console.log(response);
+    //       alert("登陆成功！");
+    //   })
+    //   .catch(function (error) {
+    //       // console.log(error);
+    //       alert(error);
+    //   });
     }
 
     

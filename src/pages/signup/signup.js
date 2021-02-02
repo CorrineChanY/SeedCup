@@ -11,7 +11,7 @@ import React, { useState } from 'react'
 import "../signup/signup.css"
 import "../../materialize.css"
 import axios from 'axios'
-import "../../misc/interface"
+import {API} from "../../misc/interface"
 import checkPhone from "../../misc/utils"
 
 // import Qs from 'qs'
@@ -205,7 +205,7 @@ class SignUp extends React.Component{
      * 同一手机号90s内不能重复
      * ToDo：获取验证码之后那个按钮变成 灰色的 90秒倒计时 不能按
      */
-    getCaptcha = () => {
+     getCaptcha = async () => {
         // console.log('phone: '+this.state.phone);
         if(this.checkPhone(this.state.phone) !== 1 ){
             alert("请输入正确的手机号!");
@@ -215,19 +215,26 @@ class SignUp extends React.Component{
             return;
         }
 
-        axios.get(base + '/api/sms/send_captcha', {
-            params:{
-                phoneNumber: this.state.phone
-            }
-        })
-        .then(function (response) {
-            // handle success
-            console.log(response);
-          })
-          .catch(function (error) {
-            // handle error
-            console.log(error);
-          })
+        try {
+          const r = await API.getCaptcha({phoneNumber: this.state.phone});
+        } catch (error) {
+          console.log(error);
+          alert(error);
+        }
+        
+        // axios.get(base + '/api/sms/send_captcha', {
+        //     params:{
+        //         phoneNumber: this.state.phone
+        //     }
+        // })
+        // .then(function (response) {
+        //     // handle success
+        //     console.log(response);
+        //   })
+        //   .catch(function (error) {
+        //     // handle error
+        //     console.log(error);
+        //   })
 
     }
 
@@ -312,7 +319,7 @@ class SignUp extends React.Component{
 
     render() {
         return(
-            <div className="content">
+            <div className="content" style={{backgroundColor:"rgb(50, 54, 61)"}}>
                 <div className="head">        
                 <h style={{fontSize: "35px"}}>微派·种子杯 </h>
                 <font  style={{fontSize:"35px", color:"rgb(50,187,255)"}}>|</font>
@@ -322,7 +329,7 @@ class SignUp extends React.Component{
                     <br /><br/><br/>
                     <br/><br/><br/>
                         {/**method="post" action='/api/user/sign_up' name="register" encType="application/json" target="/index" */}
-                        <form > 
+                        <form style={{marginLeft:"30%", marginRight:"30%"}}> 
                             <div className="captain">
                                 <div className= "groupinfo" style={{height:"65px"}}>参赛者信息</div>
                                 <br />

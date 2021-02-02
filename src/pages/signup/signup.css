@@ -6,16 +6,19 @@ body {
 }
 
 .content {
-    width: 593.4px;
+    /* width: 593.4px; */
     height: auto;
     box-shadow: rgba(0, 0, 0, .2);
     margin: 5px auto;
+    background-color: rgb(50, 54, 61);
 }
 
 .head {
     position: relative;
     top: 50px;
     padding: 5px;
+    margin-left: 30%;
+    margin-right: 10%;
 }
 
 .myform {
@@ -98,6 +101,7 @@ body {
     background: linear-gradient(to right, rgb(50, 213, 224), rgb(7, 192, 245));
     color: white;
     font-size: 18px;
+    margin-bottom: 10% ;
 }
 
 
