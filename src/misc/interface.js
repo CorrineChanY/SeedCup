@@ -41,7 +41,7 @@ export const API = {
 
 // a response interceptor
 instance.interceptors.response.use(function (response) {
-  console.log(response);
+  // console.log(response);
   switch(response.data.code){
       case "-1":
           console.log("code: -1")

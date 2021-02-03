@@ -12,9 +12,12 @@ import seedlogo from "../../img/seedlogo.png"
 import intro from "../../img/introduce.png"
 import stick from "../../img/stick.png"
 import "../seed/seed.css"
-import {Table} from "../../../src/component/Table"
+import {Table, Table2} from "../../../src/component/Table"
 import TabsControl from "../../component/Tab"
 import axios from "axios"
+import { API } from '../../misc/interface'
+
+// console.log(Rank);
 
 const base = 'http://yapi.holdice.club/mock/11';
 
@@ -24,7 +27,7 @@ function Seed() {
       <Nav />
       <Banner />
       <img src={seedlogo} alt="seedlogo" style={{position: "absolute", left: "20px", top: "15px"}}/>
-
+      {/* 除了 我的队伍 之外，其他栏目无论是否登陆都可以查看 */}
       {TabsControl([
         <Head1 name="大赛首页"/>,
         <Publish name="比赛信息"/>,
@@ -200,7 +203,8 @@ function Head1() {
 
 
 function Publish() {
-      let columns = [
+
+      let columns1 = [
           {
               name: "时间",
               dataIndex: "time"
@@ -246,7 +250,7 @@ function Publish() {
               dataIndex: "_11_1_5"
           },
       ];
-      let data = [
+      let data1 = [
           {
               time: "Seed",
               _10_17: "2020",
@@ -260,61 +264,75 @@ function Publish() {
               _11_1_4: "399404774",
               _11_1_5: "233820437"
           }
-      ]
-      // var table = Table(data, columns, {
-      //     className: "striped",
-      //     caption: "决赛决赛",
-      //     id: "finalrank"
-      // });
-  // }
+      ];
 
-  // return table;
+      let columns2=[
+        {
+          name: "时间",
+          dataIndex: "time"
+        },
+        {
+          name: "比赛状态",
+          dataIndex: "gameStatus"
+        },
+        {
+          name: "匹配小组",
+          dataIndex: "vs"
+        }
+      ];
+      let data2=[];
+  // let a = <Table dataSource={data1} columns={columns1} props={{className: "striped", caption: "seed发布表", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
+  // console.log(a);
   return(
-      <div>
-          <h1 style={{color: "black"}}>This is Publish!</h1>
-      </div>
+    <>
+    <Table dataSource={data1} columns={columns1} props={{className: "striped", caption: "seed发布表", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
+    <Table dataSource={data2} columns={columns2} props={{className: "striped", caption: "比赛信息表", style: {color:"black", marginTop: "50px", marginLeft:"5%", marginBottom:"50px", width:"90%"} }} />
+    </>
   )
+
 }
 
 function Lister(){
-    function getData() {
-        axios.get('/api/team/info')
-        .then(function (response){
-            // handle success
-            console.log(response);
-        })
-        .catch(function (error){
-            // handle error
-            console.log(error);
-        })
-        .then(function (){
-            // always executed
-        });
+  return async function getrank() {
+    try{
+      const res = await API.getRank({gameStatus: 1})
+       return(<Table2 dataSource={res.data.data.sheetData} columns={res.data.data.sheetInfo} 
+                  props={{className: "striped", caption: "排行榜", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
+       )
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-  return(
-      <div>
-          <h1 style={{color: "black"}}>This is Lister!</h1>
-          <button onClick={getData}>
-              获取数据
-          </button>
-      </div>
-  )
+
+
+  // console.log(getrank());
+  // return getrank();
+
+  // return a;
+
+  // const res = getrank();
+  // console.log(res);
+  // return res;
+  // console.log(myValue);
+  // return(
+  //     <div>
+  //         {/* <h1 style={{color: "black"}}>This is Lister!</h1> */}
+  //         <Table dataSource={myValue.data.data.sheetData} columns={myValue.data.data.sheetInfo} props={{className: "striped", caption: "seed发布表", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
+          
+  //     </div>
+  // )
 }
 
 function Percenter() {
   return(
-    <div>
       <h1 style={{color: "black"}}>This is Percenter!</h1>
-    </div>
   )
 }
 
 function Playback() {
   return(
-    <div>
       <h1 style={{color: "black"}}>敬请期待</h1>
-    </div>
   )
 }
 
