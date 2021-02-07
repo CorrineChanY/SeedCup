@@ -70,3 +70,4 @@ export function Table2({dataSource, columns, props}) {
     </table>
   )
 }
+

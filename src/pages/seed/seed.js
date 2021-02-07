@@ -281,8 +281,6 @@ function Publish() {
         }
       ];
       let data2=[];
-  // let a = <Table dataSource={data1} columns={columns1} props={{className: "striped", caption: "seed发布表", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
-  // console.log(a);
   return(
     <>
     <Table dataSource={data1} columns={columns1} props={{className: "striped", caption: "seed发布表", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
@@ -304,24 +302,6 @@ function Lister(){
     }
   }
 
-
-
-  // console.log(getrank());
-  // return getrank();
-
-  // return a;
-
-  // const res = getrank();
-  // console.log(res);
-  // return res;
-  // console.log(myValue);
-  // return(
-  //     <div>
-  //         {/* <h1 style={{color: "black"}}>This is Lister!</h1> */}
-  //         <Table dataSource={myValue.data.data.sheetData} columns={myValue.data.data.sheetInfo} props={{className: "striped", caption: "seed发布表", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
-          
-  //     </div>
-  // )
 }
 
 function Percenter() {
