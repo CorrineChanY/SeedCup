@@ -6,15 +6,14 @@
  * @createDate 2020-12-15
  */
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import seedlogo from "../../img/seedlogo.png"
 import intro from "../../img/introduce.png"
 import stick from "../../img/stick.png"
 import "../seed/seed.css"
-import {Table, Table2} from "../../../src/component/Table"
+import {Table} from "../../../src/component/Table"
 import TabsControl from "../../component/Tab"
-import axios from "axios"
 import { API } from '../../misc/interface'
 
 // console.log(Rank);
@@ -62,6 +61,45 @@ function Nav() {
 }
 
 function Banner() {
+
+//   async function submit(user){
+//     if (filedata == new FormData()||user.seedcode=="") {
+//         user.x_alert("数据有误");
+//     }
+//     filedata.append('seed', user.seedcode);
+//     let formdata= await user.post('/upload_submit_txt/',filedata);
+//     {
+//         if (formdata.code == 114) {
+//                 user.x_alert("今日提交次数已到上限");
+//                 window.location.reload();
+//             } else if (formdata.code == 107) {
+//                 user.x_alert("请先登陆");
+//                 window.location.reload();
+//             } else if (formdata.code == 108) {
+//                 user.x_alert("您的队伍未晋级");
+//                 window.location.reload();
+//             } else if (formdata.code == 115) {
+//                 user.x_alert("提交文件超过10M");
+//                 window.location.reload();
+//             } else if (formdata.code == 116) {
+//                 user.x_alert("请提交标准格式的zip压缩包");
+//                 window.location.reload();
+//             } else if (formdata.code == 0) {
+//                 user.x_alert("上传成功(´・ω・`)");
+//                 window.location.reload();
+//             } else if (formdata.code == 100) {
+//                 user.x_alert("评分失败，请检查输出文件的格式");
+//                 window.location.reload();
+//             } else if (formdata.code == 117) {
+//                 user.x_alert("文件内容不正确");
+//                 window.location.reload();
+//             } else if (formdata.code == 119) {
+//                 user.x_alert("当前不可以提交");
+//                 window.location.reload();
+//             }
+//         }
+// }
+
   return(
     <div className="containtent">
       <Link to="">
@@ -71,7 +109,7 @@ function Banner() {
       </Link>
 
       <Link to="">
-        <button className="btn-large join-button"style={{position:"relative", top: "70%"}}>
+        <button className="btn-large join-button"  style={{position:"relative", top: "70%"}}>
           提交结果
         </button>
       </Link>
@@ -207,47 +245,47 @@ function Publish() {
       let columns1 = [
           {
               name: "时间",
-              dataIndex: "time"
+              index: "time"
           },
           {
               name: "10月17日",
-              dataIndex: "_10_17"
+              index: "_10_17"
           },
           {
               name: "10月20日",
-              dataIndex: "_10_20"
+              index: "_10_20"
           },
           {
               name: "10月23日",
-              dataIndex: "_10_23"
+              index: "_10_23"
           },
           {
               name: "10月26日",
-              dataIndex: "_10_26"
+              index: "_10_26"
           },
           {
               name: "10月29日",
-              dataIndex: "_10_29"
+              index: "_10_29"
           },
           {
               name: "11月1日-1",
-              dataIndex: "_11_1_1"
+              index: "_11_1_1"
           },
           {
               name: "11月1日-2",
-              dataIndex: "_11_1_2"
+              index: "_11_1_2"
           },
           {
               name: "11月1日-3",
-              dataIndex: "_11_1_3"
+              index: "_11_1_3"
           },
           {
               name: "11月1日-4",
-              dataIndex: "_11_1_4"
+              index: "_11_1_4"
           },
           {
               name: "11月1日-5",
-              dataIndex: "_11_1_5"
+              index: "_11_1_5"
           },
       ];
       let data1 = [
@@ -269,39 +307,72 @@ function Publish() {
       let columns2=[
         {
           name: "时间",
-          dataIndex: "time"
+          index: "time"
         },
         {
           name: "比赛状态",
-          dataIndex: "gameStatus"
+          index: "gameStatus"
         },
         {
           name: "匹配小组",
-          dataIndex: "vs"
+          index: "vs"
         }
       ];
       let data2=[];
   return(
     <>
-    <Table dataSource={data1} columns={columns1} props={{className: "striped", caption: "seed发布表", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
-    <Table dataSource={data2} columns={columns2} props={{className: "striped", caption: "比赛信息表", style: {color:"black", marginTop: "50px", marginLeft:"5%", marginBottom:"50px", width:"90%"} }} />
+    <Table dataSource={data1} columns={columns1} props={{className: "striped", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"}}} caption="seed发布表"/>
+    <Table dataSource={data2} columns={columns2} props={{className: "striped", style: {color:"black", marginTop: "50px", marginLeft:"5%", marginBottom:"50px", width:"90%"}}} caption="比赛信息表"  />
     </>
   )
 
 }
 
+//我想在前面一列加上排名，可是好像无法修改，不知道怎么办
 function Lister(){
-  return async function getrank() {
-    try{
-      const res = await API.getRank({gameStatus: 1})
-       return(<Table2 dataSource={res.data.data.sheetData} columns={res.data.data.sheetInfo} 
-                  props={{className: "striped", caption: "排行榜", style: {color:"black", marginTop: "50px", marginLeft:"5%", width:"90%"} }} />
-       )
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const [data1, setData1] = useState({ sheetData:[], sheetInfo:[] });
+  const [data2, setData2] = useState({ sheetData:[], sheetInfo:[] });
+  const [data3, setData3] = useState({ sheetData:[], sheetInfo:[] });
+  // const [data, setData] = useState([]);
+  // const [info, setInfo] = useState([]);
+  useEffect(() => {
+      ;(async function(){
+        const res1 = await API.getRank({gameStatus: 1});
+        setData1(res1.data.data);
+        const res2 = await API.getRank({gameStatus: 2});
+        setData2(res2.data.data);
+        const res3 = await API.getRank({gameStatus: 3});
+        setData3(res3.data.data);
+        // res.data.data.sheetData.unshift({"name": "Ranking", "index":"rank", "type":"Integer"});
+        // setData(res.data.data.sheetData);
+        // setInfo(res.data.data.sheetInfo.map( (item, index) => {
+        //   item.rank=index+1;
+        // }));
+      })();
+  }, []);
 
+  return (
+    <>
+      <Table
+            dataSource={data1.sheetData}//data.sheetData
+            columns={data1.sheetInfo}
+            props={{className: "striped", style: {color:"black", marginTop: "50px", marginLeft:"5%", marginBottom:"5%", width:"90%"} }}
+            caption="初赛"
+        />
+      <Table
+            dataSource={data2.sheetData}//data.sheetData
+            columns={data2.sheetInfo}
+            props={{className: "striped", style: {color:"black", marginTop: "50px", marginLeft:"5%", marginBottom:"5%", width:"90%"} }}
+            caption="复赛"
+      />
+      <Table
+            dataSource={data3.sheetData}//data.sheetData
+            columns={data3.sheetInfo}
+            props={{className: "striped", style: {color:"black", marginTop: "50px", marginLeft:"5%", marginBottom:"5%", width:"90%"} }}
+            caption="决赛"
+      />
+    </>
+  );
 }
 
 function Percenter() {

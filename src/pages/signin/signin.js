@@ -10,12 +10,8 @@ import { useState } from 'react'
 import "../signin/signin.css"
 import "../../materialize.css"
 import signin from "../../img/signin.png"
-import axios from "axios"
 import "../../misc/interface"
 import { API } from '../../misc/interface'
-
-axios.defaults.baseURL = 'http://www.holdice.club:8087';
-axios.defaults.timeout = 5000;
 
 function SignIn() {
 
@@ -31,7 +27,6 @@ function SignIn() {
     }
 
     async function logIn() {
-      // 拦截器在interface.js
       try {
         const r = await API.SignIn({username: usr, password: pass});
         alert("登陆成功！");
@@ -39,25 +34,7 @@ function SignIn() {
         console.log(error);
         alert(error);
       }
-      
-    //   axios.post('/api/user/log_in', {
-    //       username: usr,
-    //       password: pass
-    //   },{
-    //       headers: {
-    //           'Content-Type': 'application/json'
-    //       }
-    //   })
-    //   .then(function (response) {
-    //       // console.log(response);
-    //       alert("登陆成功！");
-    //   })
-    //   .catch(function (error) {
-    //       // console.log(error);
-    //       alert(error);
-    //   });
-    }
-
+    }    
     
 
     return(
@@ -101,6 +78,6 @@ function SignIn() {
         </div>
       </div>
     )
-};
+}
 
 export default SignIn;

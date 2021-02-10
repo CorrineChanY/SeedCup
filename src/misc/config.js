@@ -6,7 +6,7 @@
  * @createDate 2021-01-27
  */
 
-export const BASE_URL = 'http://www.holdice.club:8087';
+export const BASE_URL = 'http://47.112.128.54:8087';
 
 export const TIMEOUT = 5000;
 
