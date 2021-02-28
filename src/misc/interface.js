@@ -32,7 +32,7 @@ export const API = {
 
   getRank : function(status) {
     return instance.get(URL.rank, {
-      params: status // 注意status是对象{gameStatus: xxx}
+      params: status // 注意status是object {gameStatus: xxx}
     })
   }
 }
