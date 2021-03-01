@@ -7,13 +7,11 @@
  */
 
 import React from 'react'
-// import { render , Button} from 'react-dom'
 import { Router, Route, Link  } from 'react-router-dom'
 import { createHashHistory } from 'history';
 import Seed from '../pages/seed/seed'
 import SignIn from '../pages/signin/signin'
 import SignUp from '../pages/signup/signup'
-import App from "../App"
 
 const hashHistory = createHashHistory();
 

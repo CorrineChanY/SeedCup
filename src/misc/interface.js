@@ -34,7 +34,11 @@ export const API = {
     return instance.get(URL.rank, {
       params: status // 注意status是object {gameStatus: xxx}
     })
-  }
+  },
+
+  getCurrent : function() {return instance.get(URL.myinfo)},
+
+  LogOut : function() {return instance.get(URL.logout)}
 }
 
 
@@ -69,8 +73,14 @@ instance.interceptors.response.use(function (response) {
             throw new Error("验证码错误！");
           }
           break;
+      case "104":
+          console.log("code: 104");
+          if(response.data.message === "need login"){
+            throw new Error("未登陆！");
+          }
+          break;
       default:
-          console.log("default");
+          // console.log("default");
           break;
   }
   return response;

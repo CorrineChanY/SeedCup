@@ -15,6 +15,11 @@ import Publish from '../seed/Publish'
 import Lister from '../seed/Lister'
 import Percenter from '../seed/Percenter'
 import Playback from '../seed/Playback'
+import { API } from '../../misc/interface'
+import { useState, useEffect } from 'react'
+import { createHashHistory } from 'history';
+
+const hashHistory = createHashHistory();
 
 function Seed() {
   return(
@@ -34,21 +39,57 @@ function Seed() {
   )
 }
 
+
 function Nav() {
+  const [usr, setUsr] = useState({});
+
+  useEffect(() => {
+    ;(async function checkLogin(){
+      try {
+        const r = await API.getCurrent();
+        setUsr(r.data.data);
+      } catch(error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+  
+  async function handleLogOut() {
+    //注销登陆
+    try{
+      const res = await API.LogOut();
+      //跳转页面
+      hashHistory.push("/signin");
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
   return(
     <div>
       <nav style={{backgroundColor:"black"}} className="nav">
         <ul style={{position: "relative", left: "85%"}}>
-          <li style={{position: "relative"}}>
-            <Link to="/signin" style={{color:"white"}}>
-              sign in
-            </Link>
-          </li>
-          <li style={{position: "relative"}}>
-            <Link to="/signup" style={{color:"white"}}>
-              sign up
-            </Link>
-          </li>
+          {usr.usrname ? (
+            <>
+            <span style={{color:"white"}}>{usr.usrname}</span>
+            <span style={{color:"white"}} onClick={handleLogOut}>log out</span>
+            </>
+          ) : (
+            <>
+            <li style={{position: "relative"}}>
+              <Link to="/signin" style={{color:"white"}}>
+                sign in
+              </Link>
+            </li>
+            <li style={{position: "relative"}}>
+              <Link to="/signup" style={{color:"white"}}>
+                sign up
+              </Link>
+            </li>
+            </>
+          )}
+          
+          
         </ul>
       </nav>
     </div>

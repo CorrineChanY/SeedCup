@@ -19,6 +19,7 @@ function Lister(){
   const [data3, setData3] = useState({ sheetData:[], sheetInfo:[] });
   // const [data, setData] = useState([]);
   // const [info, setInfo] = useState([]);
+  
   useEffect(() => {
       ;(async function(){
         const res1 = await API.getRank({gameStatus: 1});

@@ -12,6 +12,9 @@ import "../../materialize.css"
 import signin from "../../img/signin.png"
 import "../../misc/interface"
 import { API } from '../../misc/interface'
+import { createHashHistory } from 'history';
+
+const hashHistory = createHashHistory();
 
 function SignIn() {
 
@@ -30,6 +33,7 @@ function SignIn() {
       try {
         const r = await API.SignIn({username: usr, password: pass});
         alert("登陆成功！");
+        hashHistory.push("/index");
       } catch (error) {
         console.log(error);
         alert(error);
