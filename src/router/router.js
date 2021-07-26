@@ -7,30 +7,36 @@
  */
 
 import React from 'react'
-import { Router, Route, Link  } from 'react-router-dom'
-import { createHashHistory } from 'history';
+import { Route, Switch, Redirect, Router } from 'react-router-dom'
 import Seed from '../pages/seed/seed'
 import SignIn from '../pages/signin/signin'
 import SignUp from '../pages/signup/signup'
-
-const hashHistory = createHashHistory();
+import history from '../history';
 
 class Rt extends React.Component{
     render() {
         return(
             <> 
-                {/* <button onClick={() => {this.props.history.push("/index")}}>
-                    seedcup //为什么说push()是undefined?
-                </button> */}
-                
-                <Router history={hashHistory}>
-                    <Route path="/index" component={Seed}/>
-                    <Route path="/signin" component={SignIn}/>
-                    <Route path="/signup" component={SignUp}/>
-                    {/* <Route path="/" component={App}/> */}
-                    {/* <Route path="/download_doc" component={Download_btn}/> */}
-
-                </Router>
+              <Router history={history}>
+                <Switch>
+                  <Route path='/index' render={() => 
+                    <Seed>
+                      <Route exact path="/index" component={Seed}/>
+                    </Seed>
+                  }/>
+                  <Route path='/signin' render={() => 
+                    <SignIn>
+                      <Route exact path="/signin" component={SignIn}/>
+                    </SignIn>
+                  }/>
+                  <Route path='/signup' render={() => 
+                    <SignUp>
+                      <Route exact path="/signup" component={SignUp}/>
+                    </SignUp>
+                  }/>
+                  <Redirect exact to="/index" from='/' />
+                </Switch>
+              </Router>
             </>
         )
     }

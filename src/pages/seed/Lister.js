@@ -9,7 +9,7 @@
 
 import {Table} from "../../../src/component/Table"
 import { useState, useEffect } from 'react'
-import { API } from '../../misc/interface'
+import { getRank } from '../../misc/apis/team'
 
 
 //我想在前面一列加上排名，可是好像无法修改，不知道怎么办
@@ -22,11 +22,11 @@ function Lister(){
   
   useEffect(() => {
       ;(async function(){
-        const res1 = await API.getRank({gameStatus: 1});
+        const res1 = await getRank({gameStatus: 1});
         setData1(res1.data.data);
-        const res2 = await API.getRank({gameStatus: 2});
+        const res2 = await getRank({gameStatus: 2});
         setData2(res2.data.data);
-        const res3 = await API.getRank({gameStatus: 3});
+        const res3 = await getRank({gameStatus: 3});
         setData3(res3.data.data);
         // res.data.data.sheetData.unshift({"name": "Ranking", "index":"rank", "type":"Integer"});
         // setData(res.data.data.sheetData);

@@ -14,8 +14,8 @@ export function Table({dataSource, columns, props, caption}) {
       <thead >
         <tr>
         {
-          columns.map( (value) => {return(
-            <th>{value.name}</th>
+          columns.map( (value, index) => {return(
+            <th key={index}>{value.name}</th>
           )})
         }
         </tr>
@@ -23,11 +23,11 @@ export function Table({dataSource, columns, props, caption}) {
 
       <tbody>
         {
-          dataSource.map( (value) => { return(
-            <tr>{
+          dataSource.map( (value, index) => { return(
+            <tr key={index}>{
               columns.map((element) => {
                 return(
-                <td>{value[element.index]}</td>
+                <td key={element.index}>{value[element.index]}</td>
                 )})
               }
             </tr>)

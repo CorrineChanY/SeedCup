@@ -8,7 +8,9 @@
 
 function Playback() {
   return(
-      <h1 style={{color: "black"}}>敬请期待</h1>
+    <>
+      <h1 style={{color: "black", marginTop: '1em'}}>敬请期待</h1>
+    </>
   )
 }
 

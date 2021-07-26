@@ -6,23 +6,61 @@
  * @createDate 2020-12-15
  */
 
+ export function setToken(content) {
+  if(!localStorage) {
+    throw new Error("您的浏览器不支持localStorage,请尝试更新浏览器");
+  }
+  localStorage.setItem("token", content);
+}
 
- /* 验证手机号 */
- function checkPhone(value) {
-  // var regex = /^((\+)?86|((\+)?86)?)0?1[3458]\d{9}$/; 
+export function getToken() {
+  if(!localStorage) {
+    return "";
+  }
+  const token = localStorage.getItem("token") || "";
+  return token;
+}
+
+export function removeToken() {
+  localStorage.removeItem("token");
+}
+
+/**
+ * @description 验证手机号格式
+ * @param {string} value 
+ * @returns true -- 格式正确
+ *          false -- 格式错误
+ *          null -- 没有输入
+ */
+ export function checkPhone(value) {
   var regex = /^1[3458]\d{9}$/; 
   if (value) {
-      // react使用正则表达式变量的test方法进行校验
-      // 直接使用value.match(regex)显示match未定义
       if (regex.test(value)) { 
-          // callback();
-          return 1;
+          return true;
       } else { 
-          // callback('请输入正确的手机号码！');
-          return 0;
+          return false;
       }
   } else {
-      // 这里的callback函数会报错
-      return 100;
+      return null;
+  }
+}
+
+/**
+ * 验证邮箱格式
+ * @param {string} email 
+ * @returns true -- 格式正确
+ *          false -- 格式错误
+ *          null -- 没有输入
+ */
+export function checkEmail(email) {
+  var reg = RegExp('[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+')
+  if (email) {
+    if(reg.test(email)) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return null;
   }
 }

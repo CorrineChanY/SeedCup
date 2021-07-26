@@ -5,6 +5,10 @@ body {
     color: #fff;
 }
 
+.captain {
+  margin: 5% 25% 1% 25%;
+}
+
 .content {
     /* width: 593.4px; */
     height: auto;
@@ -17,7 +21,7 @@ body {
     position: relative;
     top: 50px;
     padding: 5px;
-    margin-left: 30%;
+    margin-left: 25%;
     margin-right: 10%;
 }
 
@@ -124,11 +128,13 @@ textarea:focus {
 
 .emailinfo {
     color: red;
-    display: none;
 }
 
 
 .phoneinfo {
     color: red;
-    display: none;
+}
+
+.pwdinfo {
+  color: red;
 }

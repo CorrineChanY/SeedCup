@@ -11,10 +11,11 @@ import "../signin/signin.css"
 import "../../materialize.css"
 import signin from "../../img/signin.png"
 import "../../misc/interface"
-import { API } from '../../misc/interface'
-import { createHashHistory } from 'history';
-
-const hashHistory = createHashHistory();
+import { LogIn } from '../../misc/apis/user'
+import history from '../../history'
+import { setToken } from '../../misc/utils'
+import md5 from "js-md5";
+import { message } from 'antd'
 
 function SignIn() {
 
@@ -31,14 +32,16 @@ function SignIn() {
 
     async function logIn() {
       try {
-        const r = await API.SignIn({username: usr, password: pass});
-        alert("登陆成功！");
-        hashHistory.push("/index");
+        const r = await LogIn({username: usr, password: md5(pass)}); // 之后需要md5加密
+        console.log(r)
+        setToken(r.data.data)
+        message.success("登陆成功！");
+        history.push("/index");
       } catch (error) {
         console.log(error);
-        alert(error);
       }
     }    
+
     
 
     return(
@@ -65,7 +68,7 @@ function SignIn() {
               <br />
               <input onInput={handlePassInput} type="password" style={{width:"50%"}}></input>
               <br />
-              <span style={{position:"relative", left: "48%"}}><a href="/#/signup" style={{color:"white", textDecoration:"none"}}>sign up</a></span>
+              <span style={{position:"relative", left: "48%"}}><a href="/signup" style={{color:"white", textDecoration:"none"}}>sign up</a></span>
             </form>
 
             <br />

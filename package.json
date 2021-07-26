@@ -9,6 +9,7 @@
     "antd": "^4.11.2",
     "axios": "^0.21.1",
     "jquery": "^3.5.1",
+    "js-md5": "^0.7.3",
     "materialize-css": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

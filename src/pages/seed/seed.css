@@ -449,3 +449,9 @@
     display: flex;
   }
 
+  .containtent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+

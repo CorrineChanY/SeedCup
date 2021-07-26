@@ -14,10 +14,6 @@ import "../materialize.css"
 function TabsControl(props){
   const[currentIndex, setIndex] = useState(0);
 
-  function check_tittle_index(index) {
-    return index === currentIndex ? "Tab_tittle active" : "Tab_tittle";
-  }
-
   function check_item_display(index){
     return index===currentIndex ? "block" : "none";
   }
@@ -25,12 +21,11 @@ function TabsControl(props){
   return(
     <div >
       {/**动态生成Tab导航 */}
-      {/* check_tittle_index(index) */}
-      <div className="tabs">
+      <div style={{display: 'flex'}}>
         {
           React.Children.map(props.children, (element, index) => {
             return(
-              <button onClick={ () => {setIndex(index)} } className="tab col s2 taber" style={{color:"black"}}>
+              <button onClick={ () => {setIndex(index)} } className="btn-large" style={{color:"black", flex: 4}}>
                 {element.props.name}
               </button>
             )

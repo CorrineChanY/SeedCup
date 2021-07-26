@@ -15,16 +15,66 @@ import Publish from '../seed/Publish'
 import Lister from '../seed/Lister'
 import Percenter from '../seed/Percenter'
 import Playback from '../seed/Playback'
-import { API } from '../../misc/interface'
+import { getCurrent } from '../../misc/apis/user'
 import { useState, useEffect } from 'react'
-import { createHashHistory } from 'history';
-
-const hashHistory = createHashHistory();
+import history from '../../history'
+import { removeToken } from '../../misc/utils'
+import { getTeamInfo } from '../../misc/apis/team'
+import { message } from 'antd'
 
 function Seed() {
+
+  const [user, setUsr] = useState({username: ''});
+  const [team, setTeam] = useState({})
+  
+  useEffect(() => {
+    ;(async function checkLogin(){
+      try {
+        const r = await getCurrent();
+        console.log(r)
+        setUsr(r.data.data || {});
+      } catch(error) {
+        setUsr({})
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    ;(async function getTeam(){
+      try {
+        const r = await getTeamInfo(-1);
+        console.log(r)
+        if(r.data.code === '110'){
+          setTeam({id: null})
+        } else {
+          setTeam(r.data.data || {});
+        }
+      } catch(error) {
+        setTeam({})
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  async function getTeam(){
+    try {
+      const r = await getTeamInfo(-1);
+      console.log(r)
+      if(r.data.code === '110'){
+        setTeam({id: null})
+      } else {
+        setTeam(r.data.data || {});
+      }
+    } catch(error) {
+      setTeam({})
+      console.log(error);
+    }
+  }
+
   return(
     <div className="main-banner" style={{overflowX: "hidden"}}>
-      <Nav />
+      <Nav username={user.username} logout={(e)=>{setUsr({}); setTeam({}); message.success(e);}}/>
       <Banner />
       <img src={seedlogo} alt="seedlogo" style={{position: "absolute", left: "20px", top: "15px"}}/>
       {/* 除了 我的队伍 之外，其他栏目无论是否登陆都可以查看 */}
@@ -32,7 +82,7 @@ function Seed() {
         <Head name="大赛首页"/>
         <Publish name="比赛信息"/>
         <Lister name="排行榜"/>
-        <Percenter name="我的队伍"/>
+        <Percenter name="我的队伍" username={user.username} team={team} userId={user.id} createTeam={(e)=>{getTeam(); message.success(e);}}/>
         <Playback name="赛局回放"/>
       </TabsControl>
     </div>
@@ -40,39 +90,25 @@ function Seed() {
 }
 
 
-function Nav() {
-  const [usr, setUsr] = useState({});
+function Nav(props) {
 
-  useEffect(() => {
-    ;(async function checkLogin(){
-      try {
-        const r = await API.getCurrent();
-        setUsr(r.data.data);
-      } catch(error) {
-        console.log(error);
-      }
-    })();
-  }, []);
-  
+  const { logout, username } = props;
+
   async function handleLogOut() {
     //注销登陆
-    try{
-      const res = await API.LogOut();
-      //跳转页面
-      hashHistory.push("/signin");
-    } catch(error) {
-      console.log(error);
-    }
+    removeToken()
+    logout('已退出登录!')
+    // TODO 更新Nav、队伍模块
   }
 
   return(
     <div>
       <nav style={{backgroundColor:"black"}} className="nav">
-        <ul style={{position: "relative", left: "85%"}}>
-          {usr.usrname ? (
+        <ul style={{position: "relative", left: "85%", display: 'flex'}}>
+          {username ? (
             <>
-            <span style={{color:"white"}}>{usr.usrname}</span>
-            <span style={{color:"white"}} onClick={handleLogOut}>log out</span>
+            <div style={{color:"white"}}>{username}</div>
+            <Link style={{color:"white"}} onClick={handleLogOut} to='/index'>log out</Link>
             </>
           ) : (
             <>
@@ -138,17 +174,13 @@ function Banner() {
 
   return(
     <div className="containtent">
-      <Link to="">
-        <button className="btn-large join-button" style={{position:"relative", top: "70%"}}>
-          试题下载
-        </button>
-      </Link>
+      <button className="btn-large join-button" style={{position:"relative", top: "70%", marginRight: '10px'}}>
+        试题下载
+      </button>
 
-      <Link to="">
-        <button className="btn-large join-button"  style={{position:"relative", top: "70%"}}>
-          提交结果
-        </button>
-      </Link>
+      <button className="btn-large join-button"  style={{position:"relative", top: "70%", marginLeft: '10px'}}>
+        提交结果
+      </button>
     </div>
   )
 }

@@ -1,8 +1,4 @@
-// import { render } from "@testing-library/react";
-// import React, { useState } from "react";
 import Rt from "../src/router/router"
-import { Link } from 'react-router-dom'
-import TabComponent from "../src/component/Tab"
 
 
 function App() {
