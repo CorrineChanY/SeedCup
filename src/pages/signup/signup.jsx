@@ -1,6 +1,6 @@
 /**
  * 注册界面
- * @file signup.js
+ * @file signup.jsx
  * @author 
  * @copyright 
  * @createDate 2020-12-15
@@ -12,7 +12,7 @@ import "../signup/signup.css"
 import { checkPhone, checkEmail } from '../../misc/utils'
 import { getCaptcha, signUp } from '../../misc/apis/user'
 import history from "../../history";
-import { message, notification } from 'antd';
+import { message } from 'antd';
 
 class SignUp extends React.Component{
   constructor(props) {

@@ -1,6 +1,6 @@
 /**
  * 登陆界面
- * @file signin.js
+ * @file signin.jsx
  * @author 
  * @copyright 
  * @createDate 2020-12-15

@@ -8,9 +8,9 @@
 
 import React from 'react'
 import { Route, Switch, Redirect, Router } from 'react-router-dom'
-import Seed from '../pages/seed/seed'
-import SignIn from '../pages/signin/signin'
-import SignUp from '../pages/signup/signup'
+import Seed from '../pages/seed/seed.jsx'
+import SignIn from '../pages/signin/signin.jsx'
+import SignUp from '../pages/signup/signup.jsx'
 import history from '../history';
 
 class Rt extends React.Component{

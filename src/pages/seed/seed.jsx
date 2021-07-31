@@ -1,6 +1,6 @@
 /**
  * 种子杯网站首页
- * @file seed.js
+ * @file seed.jsx
  * @author 
  * @copyright 
  * @createDate 2020-12-15
@@ -10,14 +10,13 @@ import { Link } from 'react-router-dom'
 import seedlogo from "../../img/seedlogo.png"
 import "../seed/seed.css"
 import TabsControl from "../../component/Tab"
-import Head from '../seed/Head'
-import Publish from '../seed/Publish'
-import Lister from '../seed/Lister'
-import Percenter from '../seed/Percenter'
-import Playback from '../seed/Playback'
+import Head from './Head.jsx'
+import Publish from './Publish.jsx'
+import Lister from './Lister.jsx'
+import Percenter from './Percenter.jsx'
+import Playback from './Playback.jsx'
 import { getCurrent } from '../../misc/apis/user'
 import { useState, useEffect } from 'react'
-import history from '../../history'
 import { removeToken } from '../../misc/utils'
 import { getTeamInfo } from '../../misc/apis/team'
 import { message } from 'antd'
@@ -82,7 +81,15 @@ function Seed() {
         <Head name="大赛首页"/>
         <Publish name="比赛信息"/>
         <Lister name="排行榜"/>
-        <Percenter name="我的队伍" username={user.username} team={team} userId={user.id} createTeam={(e)=>{getTeam(); message.success(e);}}/>
+        <Percenter name="我的队伍" 
+          username={user.username} 
+          team={team} 
+          userId={user.id} 
+          createTeam={(e)=>{getTeam(); message.success(e);}}
+          addMember={()=>{getTeam(); message.success("添加成功！");}}
+          delMember={()=>{getTeam(); message.success("删除成功！");}}
+          editIntro={()=>{getTeam(); message.success("修改成功！");}}
+        />
         <Playback name="赛局回放"/>
       </TabsControl>
     </div>

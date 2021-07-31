@@ -1,12 +1,12 @@
 /**
  * 比赛信息
- * @file Publish.js
+ * @file Publish.jsx
  * @author 
  * @copyright 
  * @createDate 
  */
 
-import {Table} from "../../../src/component/Table"
+import { Table } from "../../component/Table"
 
 function Publish() {
 

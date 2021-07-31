@@ -1,24 +1,22 @@
 /**
  * 搜索结果显示表格
- * @file TeamAddMemberSearchTable.js
+ * @file TeamAddMemberSearchTable.jsx
  * @author Chen Yi
  */
-import { useState } from "react";
- import { Table, Button, Popover, message } from "antd";
+ import { Table, Button, Popover } from "antd";
  import { WarningOutlined } from "@ant-design/icons";
  import { TABLE_DISPLAY } from '../misc/config'
 import { addMember } from "../misc/apis/team";
 
 
 export default function ResultTable(props) {
-  const { results } = props;
+  const { results, success, loading } = props;
   const { Column } = Table;
 
   async function handleAdd(e) {
-    console.log(e)
     try {
       await addMember(e.id);
-      message.success('添加成功！');
+      success();
     } catch (error) {
       
     }
@@ -26,13 +24,11 @@ export default function ResultTable(props) {
   
   return(
     <>
-      <Table dataSource={results} rowKey='id' style={{marginTop: '1em'}}>
+      <Table dataSource={results} rowKey='id' style={{marginTop: '1em'}} loading={loading}>
         {
           TABLE_DISPLAY.UserSearch.map((column, index) => {
             return(
-              <>
-                <Column title={column.title} dataIndex={column.dataIndex} key={column.key} />
-              </>
+              <Column title={column.title} dataIndex={column.dataIndex} key={column.key} />
             )
           })
         }

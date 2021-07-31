@@ -9,6 +9,7 @@ import { URL } from '../config'
 
 /**
  * 创建队伍
+ * 创建人默认为队长
  * @param {object} params 
  * @returns 
  */
@@ -37,6 +38,32 @@ export function getRank(status) {
   });
 }
 
+/**
+ * 添加队员
+ * 仅队长可操作
+ * @param {Number} userId 
+ * @returns 
+ */
 export function addMember(userId) {
   return axios.post(URL.addmember + userId)
+}
+
+/**
+ * 删除队员
+ * 仅队长可操作
+ * @param {Number} userId 
+ * @returns 
+ */
+export function deleteMember(userId) {
+  return axios.post(URL.delemember + userId)
+}
+
+/**
+ * 修改队伍介绍信息
+ * 仅队长可操作
+ * @param {String} introduction 
+ * @returns 
+ */
+export function editTeamIntro(introduction) {
+  return axios.post(URL.editteam, {introduction})
 }

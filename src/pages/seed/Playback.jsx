@@ -1,6 +1,6 @@
 /**
  * 赛局回放
- * @file Playback.js
+ * @file Playback.jsx
  * @author 
  * @copyright 
  * @createDate

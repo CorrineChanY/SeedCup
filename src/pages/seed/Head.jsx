@@ -1,6 +1,6 @@
 /**
  * 大赛首页
- * @file Head.js
+ * @file Head.jsx
  * @author 
  * @copyright 
  * @createDate 

@@ -23,7 +23,7 @@ export const URL = {
 
   // 队伍相关
   newteam : '/team/create',
-  editteam : '/team/edit_introduction',
+  editteam : '/team/edit',
   addmember : '/team/member/add/',
   delemember : '/team/member/delete/',
   teaminfo : '/team/info/',

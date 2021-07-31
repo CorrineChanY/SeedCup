@@ -1,13 +1,13 @@
 /**
  * 排行榜
- * @file Lister.js
+ * @file Lister.jsx
  * @author 
  * @copyright 
  * @createDate
  */
 
 
-import {Table} from "../../../src/component/Table"
+import { Table } from "../../component/Table"
 import { useState, useEffect } from 'react'
 import { getRank } from '../../misc/apis/team'
 
