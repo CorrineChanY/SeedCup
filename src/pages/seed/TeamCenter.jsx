@@ -92,7 +92,7 @@ function CreateTeam(props) {
     <>
       <PlusCircleOutlined
         onClick={showCreateTeam}
-        style={{ fontSize: "20px" }}
+        style={{ fontSize: "2em", marginTop: "8px", marginLeft: "10px" }}
       />
       <Modal
         title="创建队伍"

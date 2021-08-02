@@ -76,7 +76,7 @@ Axios.interceptors.response.use(function (response) {
       break;
     case "110":
       if (response.data.message === "not yet in team") {
-        alert('您还不在队伍中！');
+        // alert('您还不在队伍中！');
         throw new Error("您还不在队伍中！");
       }
       break;

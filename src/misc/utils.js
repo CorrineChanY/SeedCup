@@ -64,3 +64,23 @@ export function checkEmail(email) {
     return null;
   }
 }
+
+/**
+ * 计算各队伍的排名
+ * 同分同名
+ * @param {Object[]} data
+ * @returns {Object[]}
+ */
+ export const getDataRank = (data) => {
+  const length = data.length;
+  let dataAddRank = data;
+  dataAddRank[length - 1].rank = length;
+  for (let i = data.length - 2; i >= 0; --i) {
+    if (data[i].finalScore === data[i + 1].finalScore) {
+      dataAddRank[i].rank = dataAddRank[i + 1].rank;
+    } else {
+      dataAddRank[i].rank = i + 1;
+    }
+  }
+  return dataAddRank;
+};
