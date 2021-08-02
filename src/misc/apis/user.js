@@ -2,7 +2,6 @@
 /**
  * @file user.js
  * @author Chen Yi
- *
  * @brief 用户API
  */
 import axios from '../interface'
@@ -21,7 +20,7 @@ export function getCurrent() {
 // 注册获取验证码
 export function getCaptcha(phoneNumber) {
   return axios.get(URL.getcap, {
-    params: {phoneNumber}
+    params: { phoneNumber }
   });
 }
 
@@ -33,6 +32,6 @@ export function signUp(params) {
 // 搜索用户
 export function searchUser(keyword) {
   return axios.get(URL.search, {
-    params: {keyword}
+    params: { keyword }
   })
 }

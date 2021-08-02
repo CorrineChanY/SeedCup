@@ -6,7 +6,7 @@
 
 import TeamInfoBasic from "./TeamInfoBasic";
 import TeamInfoMembers from "./TeamInfoMembers";
-import AddMember from "./TeamAddMember.jsx";
+import AddMember from "../TeamAddMember/TeamAddMember.jsx";
 
 export default function TeamInfo(props) {
   const { team, userId, success, del, editIntro } = props;

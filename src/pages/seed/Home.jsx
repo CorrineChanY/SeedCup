@@ -1,16 +1,14 @@
 /**
  * 大赛首页
- * @file Head.jsx
- * @author 
- * @copyright 
- * @createDate 
+ * @file Home.jsx
+ * @author Chen Yi
  */
 
 import intro from "../../img/introduce.png"
 import stick from "../../img/stick.png"
 import "../seed/seed.css"
 
-function Head() {
+function Home() {
   return(
     <div className="active">
       <div className="page-container">
@@ -132,4 +130,4 @@ function Prizesort({classname, title, number, info}) {
   )
 }
 
-export default Head;
+export default Home;

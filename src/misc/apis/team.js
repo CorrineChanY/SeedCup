@@ -1,7 +1,6 @@
 /**
  * @file team.js
  * @author Chen Yi
- * 
  * @brief 队伍API
  */
 import axios from '../interface'
@@ -24,17 +23,21 @@ export function newTeam(params) {
  */
 export function getTeamInfo(id) {
   return axios.get(URL.teaminfo + id, {
-    headers:{
+    headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   })
 }
 
 
-// 获取排名
+/**
+ * 获取排行榜
+ * @param {Object} status 
+ * @returns 
+ */
 export function getRank(status) {
   return axios.get(URL.rank, {
-    params: status // 注意status是object {gameStatus: xxx}
+    params: status
   });
 }
 
@@ -65,5 +68,5 @@ export function deleteMember(userId) {
  * @returns 
  */
 export function editTeamIntro(introduction) {
-  return axios.post(URL.editteam, {introduction})
+  return axios.post(URL.editteam, { introduction })
 }

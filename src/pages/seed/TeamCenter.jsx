@@ -1,19 +1,26 @@
+/* eslint-disable no-template-curly-in-string */
 /**
  * 我的队伍
  * @file Percenter.jsx
- * @author
- * @copyright
- * @createDate
+ * @author Chen Yi
  */
 
 import { useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { Modal, Button, Form, Input, ConfigProvider, Radio } from "antd";
 import { newTeam } from "../../misc/apis/team";
-import TeamInfo from "../../component/TeamInfo.jsx";
+import TeamInfo from "../../component/TeamInfo/TeamInfo";
 
-function Percenter(props) {
-  const { username, team, createTeam, userId, addMember, delMember, editIntro } = props;
+function TeamCenter(props) {
+  const {
+    username,
+    team,
+    createTeam,
+    userId,
+    addMember,
+    delMember,
+    editIntro,
+  } = props;
 
   return (
     <>
@@ -74,8 +81,6 @@ function CreateTeam(props) {
   };
 
   const onFinish = (value) => {
-    console.log("values:", value);
-    setModalText("正在创建...");
     setConfirmLoading(true);
     newTeam(value);
     setConfirmLoading(false);
@@ -150,4 +155,4 @@ function CreateTeam(props) {
   );
 }
 
-export default Percenter;
+export default TeamCenter;

@@ -1,20 +1,20 @@
 /**
  * utils
  * @file utils.js
- * @author 
+ * @author Chen Yi
  * @copyright 
  * @createDate 2020-12-15
  */
 
- export function setToken(content) {
-  if(!localStorage) {
+export function setToken(content) {
+  if (!localStorage) {
     throw new Error("您的浏览器不支持localStorage,请尝试更新浏览器");
   }
   localStorage.setItem("token", content);
 }
 
 export function getToken() {
-  if(!localStorage) {
+  if (!localStorage) {
     return "";
   }
   const token = localStorage.getItem("token") || "";
@@ -32,16 +32,16 @@ export function removeToken() {
  *          false -- 格式错误
  *          null -- 没有输入
  */
- export function checkPhone(value) {
-  var regex = /^1[3458]\d{9}$/; 
+export function checkPhone(value) {
+  var regex = /^1[3458]\d{9}$/;
   if (value) {
-      if (regex.test(value)) { 
-          return true;
-      } else { 
-          return false;
-      }
+    if (regex.test(value)) {
+      return true;
+    } else {
+      return false;
+    }
   } else {
-      return null;
+    return null;
   }
 }
 
@@ -55,7 +55,7 @@ export function removeToken() {
 export function checkEmail(email) {
   var reg = RegExp('[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+')
   if (email) {
-    if(reg.test(email)) {
+    if (reg.test(email)) {
       return true;
     } else {
       return false;
