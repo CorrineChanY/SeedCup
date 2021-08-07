@@ -74,10 +74,10 @@ export function checkEmail(email) {
  export const getDataRank = (data) => {
   const length = data.length;
   let dataAddRank = data;
-  dataAddRank[length - 1].rank = length;
-  for (let i = data.length - 2; i >= 0; --i) {
-    if (data[i].finalScore === data[i + 1].finalScore) {
-      dataAddRank[i].rank = dataAddRank[i + 1].rank;
+  dataAddRank[0].rank = 1;
+  for (let i = 1; i <= length - 1; i++) {
+    if (data[i].finalScore === data[i - 1].finalScore) {
+      dataAddRank[i].rank = dataAddRank[i - 1].rank;
     } else {
       dataAddRank[i].rank = i + 1;
     }
